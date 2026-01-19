@@ -1,0 +1,1370 @@
+
+pytorch2.9.1+cu128:‘ù
+á
+board
+stem.0.weight
+stem.0.weight_biasgetitemnode_Conv_192"Conv*
+group†*
+pads@@@@†*
+auto_pad"NOTSET†*
+strides@@†*
+	dilations@@†JŸ
+	namespaceÀ: nn_models.MediumResNet/stem: torch.nn.modules.container.Sequential/stem.1: torch.nn.modules.batchnorm.BatchNorm2d/_native_batch_norm_legit_no_training: aten._native_batch_norm_legit_no_training.defaultJV
+!pkg.onnxscript.rewriter.rule_name1FuseBatchNormIntoConv, RemoveOptionalBiasFromConvJ≈
+pkg.torch.onnx.class_hierarchy¢['nn_models.MediumResNet', 'torch.nn.modules.container.Sequential', 'torch.nn.modules.batchnorm.BatchNorm2d', 'aten._native_batch_norm_legit_no_training.default']J†
+pkg.torch.onnx.fx_nodeÖ%_native_batch_norm_legit_no_training : [num_users=1] = call_function[target=torch.ops.aten._native_batch_norm_legit_no_training.default](args = (%conv2d, %p_stem_1_weight, %p_stem_1_bias, %b_stem_1_running_mean, %b_stem_1_running_var, 0.1, 1e-05), kwargs = {})J\
+pkg.torch.onnx.name_scopes>['', 'stem', 'stem.1', '_native_batch_norm_legit_no_training']J·
+pkg.torch.onnx.stack_trace¬File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/nn_models.py", line 104, in forward
+    x = self.stem(x)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/container.py", line 250, in forward
+    input = module(input)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/batchnorm.py", line 193, in forward
+    return F.batch_norm(
+ó	
+getitemrelu	node_relu"ReluJì
+	namespaceÖ: nn_models.MediumResNet/stem: torch.nn.modules.container.Sequential/stem.2: torch.nn.modules.activation.ReLU/relu: aten.relu.defaultJû
+pkg.torch.onnx.class_hierarchy|['nn_models.MediumResNet', 'torch.nn.modules.container.Sequential', 'torch.nn.modules.activation.ReLU', 'aten.relu.default']JÑ
+pkg.torch.onnx.fx_nodej%relu : [num_users=2] = call_function[target=torch.ops.aten.relu.default](args = (%getitem,), kwargs = {})J<
+pkg.torch.onnx.name_scopes['', 'stem', 'stem.2', 'relu']J¯
+pkg.torch.onnx.stack_traceŸFile "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/nn_models.py", line 104, in forward
+    x = self.stem(x)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/container.py", line 250, in forward
+    input = module(input)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/activation.py", line 144, in forward
+    return F.relu(input, inplace=self.inplace)
+ö
+relu
+layer1.0.conv.0.weight
+layer1.0.conv.0.weight_bias	getitem_3node_Conv_194"Conv*
+group†*
+pads@@@@†*
+auto_pad"NOTSET†*
+strides@@†*
+	dilations@@†J∏
+	namespace™: nn_models.MediumResNet/layer1: torch.nn.modules.container.Sequential/layer1.0: nn_models.ResBlock/layer1.0.conv: torch.nn.modules.container.Sequential/layer1.0.conv.1: torch.nn.modules.batchnorm.BatchNorm2d/_native_batch_norm_legit_no_training_1: aten._native_batch_norm_legit_no_training.defaultJV
+!pkg.onnxscript.rewriter.rule_name1FuseBatchNormIntoConv, RemoveOptionalBiasFromConvJÑ
+pkg.torch.onnx.class_hierarchy·['nn_models.MediumResNet', 'torch.nn.modules.container.Sequential', 'nn_models.ResBlock', 'torch.nn.modules.container.Sequential', 'torch.nn.modules.batchnorm.BatchNorm2d', 'aten._native_batch_norm_legit_no_training.default']J»
+pkg.torch.onnx.fx_node≠%_native_batch_norm_legit_no_training_1 : [num_users=1] = call_function[target=torch.ops.aten._native_batch_norm_legit_no_training.default](args = (%conv2d_1, %p_layer1_0_conv_1_weight, %p_layer1_0_conv_1_bias, %b_layer1_0_conv_1_running_mean, %b_layer1_0_conv_1_running_var, 0.1, 1e-05), kwargs = {})JÜ
+pkg.torch.onnx.name_scopesh['', 'layer1', 'layer1.0', 'layer1.0.conv', 'layer1.0.conv.1', '_native_batch_norm_legit_no_training_1']J
+pkg.torch.onnx.stack_trace—File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/nn_models.py", line 105, in forward
+    x = self.layer1(x)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/container.py", line 250, in forward
+    input = module(input)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/nn_models.py", line 78, in forward
+    return self.relu(self.conv(x) + self.skip(x))
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/container.py", line 250, in forward
+    input = module(input)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/batchnorm.py", line 193, in forward
+    return F.batch_norm(
+˘
+	getitem_3relu_1node_relu_1"ReluJÚ
+	namespace‰: nn_models.MediumResNet/layer1: torch.nn.modules.container.Sequential/layer1.0: nn_models.ResBlock/layer1.0.conv: torch.nn.modules.container.Sequential/layer1.0.conv.2: torch.nn.modules.activation.ReLU/relu_1: aten.relu.defaultJﬁ
+pkg.torch.onnx.class_hierarchyª['nn_models.MediumResNet', 'torch.nn.modules.container.Sequential', 'nn_models.ResBlock', 'torch.nn.modules.container.Sequential', 'torch.nn.modules.activation.ReLU', 'aten.relu.default']Jà
+pkg.torch.onnx.fx_noden%relu_1 : [num_users=1] = call_function[target=torch.ops.aten.relu.default](args = (%getitem_3,), kwargs = {})Jf
+pkg.torch.onnx.name_scopesH['', 'layer1', 'layer1.0', 'layer1.0.conv', 'layer1.0.conv.2', 'relu_1']Já
+pkg.torch.onnx.stack_traceËFile "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/nn_models.py", line 105, in forward
+    x = self.layer1(x)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/container.py", line 250, in forward
+    input = module(input)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/nn_models.py", line 78, in forward
+    return self.relu(self.conv(x) + self.skip(x))
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/container.py", line 250, in forward
+    input = module(input)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/activation.py", line 144, in forward
+    return F.relu(input, inplace=self.inplace)
+ú
+relu_1
+layer1.0.conv.3.weight
+layer1.0.conv.3.weight_bias	getitem_6node_Conv_196"Conv*
+group†*
+pads@@@@†*
+auto_pad"NOTSET†*
+strides@@†*
+	dilations@@†J∏
+	namespace™: nn_models.MediumResNet/layer1: torch.nn.modules.container.Sequential/layer1.0: nn_models.ResBlock/layer1.0.conv: torch.nn.modules.container.Sequential/layer1.0.conv.4: torch.nn.modules.batchnorm.BatchNorm2d/_native_batch_norm_legit_no_training_2: aten._native_batch_norm_legit_no_training.defaultJV
+!pkg.onnxscript.rewriter.rule_name1FuseBatchNormIntoConv, RemoveOptionalBiasFromConvJÑ
+pkg.torch.onnx.class_hierarchy·['nn_models.MediumResNet', 'torch.nn.modules.container.Sequential', 'nn_models.ResBlock', 'torch.nn.modules.container.Sequential', 'torch.nn.modules.batchnorm.BatchNorm2d', 'aten._native_batch_norm_legit_no_training.default']J»
+pkg.torch.onnx.fx_node≠%_native_batch_norm_legit_no_training_2 : [num_users=1] = call_function[target=torch.ops.aten._native_batch_norm_legit_no_training.default](args = (%conv2d_2, %p_layer1_0_conv_4_weight, %p_layer1_0_conv_4_bias, %b_layer1_0_conv_4_running_mean, %b_layer1_0_conv_4_running_var, 0.1, 1e-05), kwargs = {})JÜ
+pkg.torch.onnx.name_scopesh['', 'layer1', 'layer1.0', 'layer1.0.conv', 'layer1.0.conv.4', '_native_batch_norm_legit_no_training_2']J
+pkg.torch.onnx.stack_trace—File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/nn_models.py", line 105, in forward
+    x = self.layer1(x)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/container.py", line 250, in forward
+    input = module(input)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/nn_models.py", line 78, in forward
+    return self.relu(self.conv(x) + self.skip(x))
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/container.py", line 250, in forward
+    input = module(input)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/batchnorm.py", line 193, in forward
+    return F.batch_norm(
+ﬂ
+	getitem_6
+reluadd_5
+node_add_5"AddJá
+	namespacez: nn_models.MediumResNet/layer1: torch.nn.modules.container.Sequential/layer1.0: nn_models.ResBlock/add_5: aten.add.TensorJé
+pkg.torch.onnx.class_hierarchyl['nn_models.MediumResNet', 'torch.nn.modules.container.Sequential', 'nn_models.ResBlock', 'aten.add.Tensor']Jã
+pkg.torch.onnx.fx_nodeq%add_5 : [num_users=1] = call_function[target=torch.ops.aten.add.Tensor](args = (%getitem_6, %relu), kwargs = {})JA
+pkg.torch.onnx.name_scopes#['', 'layer1', 'layer1.0', 'add_5']J«
+pkg.torch.onnx.stack_trace®File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/nn_models.py", line 105, in forward
+    x = self.layer1(x)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/container.py", line 250, in forward
+    input = module(input)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/nn_models.py", line 78, in forward
+    return self.relu(self.conv(x) + self.skip(x))
+©
+add_5relu_2node_relu_2"ReluJª
+	namespace≠: nn_models.MediumResNet/layer1: torch.nn.modules.container.Sequential/layer1.0: nn_models.ResBlock/layer1.0.relu: torch.nn.modules.activation.ReLU/relu_2: aten.relu.defaultJµ
+pkg.torch.onnx.class_hierarchyí['nn_models.MediumResNet', 'torch.nn.modules.container.Sequential', 'nn_models.ResBlock', 'torch.nn.modules.activation.ReLU', 'aten.relu.default']JÑ
+pkg.torch.onnx.fx_nodej%relu_2 : [num_users=2] = call_function[target=torch.ops.aten.relu.default](args = (%add_5,), kwargs = {})JS
+pkg.torch.onnx.name_scopes5['', 'layer1', 'layer1.0', 'layer1.0.relu', 'relu_2']J≤
+pkg.torch.onnx.stack_traceìFile "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/nn_models.py", line 105, in forward
+    x = self.layer1(x)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/container.py", line 250, in forward
+    input = module(input)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/nn_models.py", line 78, in forward
+    return self.relu(self.conv(x) + self.skip(x))
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/activation.py", line 144, in forward
+    return F.relu(input, inplace=self.inplace)
+ú
+relu_2
+layer1.1.conv.0.weight
+layer1.1.conv.0.weight_bias	getitem_9node_Conv_198"Conv*
+group†*
+pads@@@@†*
+auto_pad"NOTSET†*
+strides@@†*
+	dilations@@†J∏
+	namespace™: nn_models.MediumResNet/layer1: torch.nn.modules.container.Sequential/layer1.1: nn_models.ResBlock/layer1.1.conv: torch.nn.modules.container.Sequential/layer1.1.conv.1: torch.nn.modules.batchnorm.BatchNorm2d/_native_batch_norm_legit_no_training_3: aten._native_batch_norm_legit_no_training.defaultJV
+!pkg.onnxscript.rewriter.rule_name1FuseBatchNormIntoConv, RemoveOptionalBiasFromConvJÑ
+pkg.torch.onnx.class_hierarchy·['nn_models.MediumResNet', 'torch.nn.modules.container.Sequential', 'nn_models.ResBlock', 'torch.nn.modules.container.Sequential', 'torch.nn.modules.batchnorm.BatchNorm2d', 'aten._native_batch_norm_legit_no_training.default']J»
+pkg.torch.onnx.fx_node≠%_native_batch_norm_legit_no_training_3 : [num_users=1] = call_function[target=torch.ops.aten._native_batch_norm_legit_no_training.default](args = (%conv2d_3, %p_layer1_1_conv_1_weight, %p_layer1_1_conv_1_bias, %b_layer1_1_conv_1_running_mean, %b_layer1_1_conv_1_running_var, 0.1, 1e-05), kwargs = {})JÜ
+pkg.torch.onnx.name_scopesh['', 'layer1', 'layer1.1', 'layer1.1.conv', 'layer1.1.conv.1', '_native_batch_norm_legit_no_training_3']J
+pkg.torch.onnx.stack_trace—File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/nn_models.py", line 105, in forward
+    x = self.layer1(x)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/container.py", line 250, in forward
+    input = module(input)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/nn_models.py", line 78, in forward
+    return self.relu(self.conv(x) + self.skip(x))
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/container.py", line 250, in forward
+    input = module(input)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/batchnorm.py", line 193, in forward
+    return F.batch_norm(
+˘
+	getitem_9relu_3node_relu_3"ReluJÚ
+	namespace‰: nn_models.MediumResNet/layer1: torch.nn.modules.container.Sequential/layer1.1: nn_models.ResBlock/layer1.1.conv: torch.nn.modules.container.Sequential/layer1.1.conv.2: torch.nn.modules.activation.ReLU/relu_3: aten.relu.defaultJﬁ
+pkg.torch.onnx.class_hierarchyª['nn_models.MediumResNet', 'torch.nn.modules.container.Sequential', 'nn_models.ResBlock', 'torch.nn.modules.container.Sequential', 'torch.nn.modules.activation.ReLU', 'aten.relu.default']Jà
+pkg.torch.onnx.fx_noden%relu_3 : [num_users=1] = call_function[target=torch.ops.aten.relu.default](args = (%getitem_9,), kwargs = {})Jf
+pkg.torch.onnx.name_scopesH['', 'layer1', 'layer1.1', 'layer1.1.conv', 'layer1.1.conv.2', 'relu_3']Já
+pkg.torch.onnx.stack_traceËFile "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/nn_models.py", line 105, in forward
+    x = self.layer1(x)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/container.py", line 250, in forward
+    input = module(input)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/nn_models.py", line 78, in forward
+    return self.relu(self.conv(x) + self.skip(x))
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/container.py", line 250, in forward
+    input = module(input)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/activation.py", line 144, in forward
+    return F.relu(input, inplace=self.inplace)
+ù
+relu_3
+layer1.1.conv.3.weight
+layer1.1.conv.3.weight_bias
+getitem_12node_Conv_200"Conv*
+group†*
+pads@@@@†*
+auto_pad"NOTSET†*
+strides@@†*
+	dilations@@†J∏
+	namespace™: nn_models.MediumResNet/layer1: torch.nn.modules.container.Sequential/layer1.1: nn_models.ResBlock/layer1.1.conv: torch.nn.modules.container.Sequential/layer1.1.conv.4: torch.nn.modules.batchnorm.BatchNorm2d/_native_batch_norm_legit_no_training_4: aten._native_batch_norm_legit_no_training.defaultJV
+!pkg.onnxscript.rewriter.rule_name1FuseBatchNormIntoConv, RemoveOptionalBiasFromConvJÑ
+pkg.torch.onnx.class_hierarchy·['nn_models.MediumResNet', 'torch.nn.modules.container.Sequential', 'nn_models.ResBlock', 'torch.nn.modules.container.Sequential', 'torch.nn.modules.batchnorm.BatchNorm2d', 'aten._native_batch_norm_legit_no_training.default']J»
+pkg.torch.onnx.fx_node≠%_native_batch_norm_legit_no_training_4 : [num_users=1] = call_function[target=torch.ops.aten._native_batch_norm_legit_no_training.default](args = (%conv2d_4, %p_layer1_1_conv_4_weight, %p_layer1_1_conv_4_bias, %b_layer1_1_conv_4_running_mean, %b_layer1_1_conv_4_running_var, 0.1, 1e-05), kwargs = {})JÜ
+pkg.torch.onnx.name_scopesh['', 'layer1', 'layer1.1', 'layer1.1.conv', 'layer1.1.conv.4', '_native_batch_norm_legit_no_training_4']J
+pkg.torch.onnx.stack_trace—File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/nn_models.py", line 105, in forward
+    x = self.layer1(x)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/container.py", line 250, in forward
+    input = module(input)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/nn_models.py", line 78, in forward
+    return self.relu(self.conv(x) + self.skip(x))
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/container.py", line 250, in forward
+    input = module(input)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/batchnorm.py", line 193, in forward
+    return F.batch_norm(
+Â
+
+getitem_12
+relu_2add_6
+node_add_6"AddJá
+	namespacez: nn_models.MediumResNet/layer1: torch.nn.modules.container.Sequential/layer1.1: nn_models.ResBlock/add_6: aten.add.TensorJé
+pkg.torch.onnx.class_hierarchyl['nn_models.MediumResNet', 'torch.nn.modules.container.Sequential', 'nn_models.ResBlock', 'aten.add.Tensor']Jé
+pkg.torch.onnx.fx_nodet%add_6 : [num_users=1] = call_function[target=torch.ops.aten.add.Tensor](args = (%getitem_12, %relu_2), kwargs = {})JA
+pkg.torch.onnx.name_scopes#['', 'layer1', 'layer1.1', 'add_6']J«
+pkg.torch.onnx.stack_trace®File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/nn_models.py", line 105, in forward
+    x = self.layer1(x)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/container.py", line 250, in forward
+    input = module(input)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/nn_models.py", line 78, in forward
+    return self.relu(self.conv(x) + self.skip(x))
+©
+add_6relu_4node_relu_4"ReluJª
+	namespace≠: nn_models.MediumResNet/layer1: torch.nn.modules.container.Sequential/layer1.1: nn_models.ResBlock/layer1.1.relu: torch.nn.modules.activation.ReLU/relu_4: aten.relu.defaultJµ
+pkg.torch.onnx.class_hierarchyí['nn_models.MediumResNet', 'torch.nn.modules.container.Sequential', 'nn_models.ResBlock', 'torch.nn.modules.activation.ReLU', 'aten.relu.default']JÑ
+pkg.torch.onnx.fx_nodej%relu_4 : [num_users=2] = call_function[target=torch.ops.aten.relu.default](args = (%add_6,), kwargs = {})JS
+pkg.torch.onnx.name_scopes5['', 'layer1', 'layer1.1', 'layer1.1.relu', 'relu_4']J≤
+pkg.torch.onnx.stack_traceìFile "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/nn_models.py", line 105, in forward
+    x = self.layer1(x)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/container.py", line 250, in forward
+    input = module(input)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/nn_models.py", line 78, in forward
+    return self.relu(self.conv(x) + self.skip(x))
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/activation.py", line 144, in forward
+    return F.relu(input, inplace=self.inplace)
+ù
+relu_4
+layer2.0.conv.0.weight
+layer2.0.conv.0.weight_bias
+getitem_15node_Conv_202"Conv*
+group†*
+pads@@@@†*
+auto_pad"NOTSET†*
+strides@@†*
+	dilations@@†J∏
+	namespace™: nn_models.MediumResNet/layer2: torch.nn.modules.container.Sequential/layer2.0: nn_models.ResBlock/layer2.0.conv: torch.nn.modules.container.Sequential/layer2.0.conv.1: torch.nn.modules.batchnorm.BatchNorm2d/_native_batch_norm_legit_no_training_5: aten._native_batch_norm_legit_no_training.defaultJV
+!pkg.onnxscript.rewriter.rule_name1FuseBatchNormIntoConv, RemoveOptionalBiasFromConvJÑ
+pkg.torch.onnx.class_hierarchy·['nn_models.MediumResNet', 'torch.nn.modules.container.Sequential', 'nn_models.ResBlock', 'torch.nn.modules.container.Sequential', 'torch.nn.modules.batchnorm.BatchNorm2d', 'aten._native_batch_norm_legit_no_training.default']J»
+pkg.torch.onnx.fx_node≠%_native_batch_norm_legit_no_training_5 : [num_users=1] = call_function[target=torch.ops.aten._native_batch_norm_legit_no_training.default](args = (%conv2d_5, %p_layer2_0_conv_1_weight, %p_layer2_0_conv_1_bias, %b_layer2_0_conv_1_running_mean, %b_layer2_0_conv_1_running_var, 0.1, 1e-05), kwargs = {})JÜ
+pkg.torch.onnx.name_scopesh['', 'layer2', 'layer2.0', 'layer2.0.conv', 'layer2.0.conv.1', '_native_batch_norm_legit_no_training_5']J
+pkg.torch.onnx.stack_trace—File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/nn_models.py", line 106, in forward
+    x = self.layer2(x)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/container.py", line 250, in forward
+    input = module(input)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/nn_models.py", line 78, in forward
+    return self.relu(self.conv(x) + self.skip(x))
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/container.py", line 250, in forward
+    input = module(input)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/batchnorm.py", line 193, in forward
+    return F.batch_norm(
+˚
+
+getitem_15relu_5node_relu_5"ReluJÚ
+	namespace‰: nn_models.MediumResNet/layer2: torch.nn.modules.container.Sequential/layer2.0: nn_models.ResBlock/layer2.0.conv: torch.nn.modules.container.Sequential/layer2.0.conv.2: torch.nn.modules.activation.ReLU/relu_5: aten.relu.defaultJﬁ
+pkg.torch.onnx.class_hierarchyª['nn_models.MediumResNet', 'torch.nn.modules.container.Sequential', 'nn_models.ResBlock', 'torch.nn.modules.container.Sequential', 'torch.nn.modules.activation.ReLU', 'aten.relu.default']Jâ
+pkg.torch.onnx.fx_nodeo%relu_5 : [num_users=1] = call_function[target=torch.ops.aten.relu.default](args = (%getitem_15,), kwargs = {})Jf
+pkg.torch.onnx.name_scopesH['', 'layer2', 'layer2.0', 'layer2.0.conv', 'layer2.0.conv.2', 'relu_5']Já
+pkg.torch.onnx.stack_traceËFile "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/nn_models.py", line 106, in forward
+    x = self.layer2(x)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/container.py", line 250, in forward
+    input = module(input)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/nn_models.py", line 78, in forward
+    return self.relu(self.conv(x) + self.skip(x))
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/container.py", line 250, in forward
+    input = module(input)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/activation.py", line 144, in forward
+    return F.relu(input, inplace=self.inplace)
+ù
+relu_5
+layer2.0.conv.3.weight
+layer2.0.conv.3.weight_bias
+getitem_18node_Conv_204"Conv*
+group†*
+pads@@@@†*
+auto_pad"NOTSET†*
+strides@@†*
+	dilations@@†J∏
+	namespace™: nn_models.MediumResNet/layer2: torch.nn.modules.container.Sequential/layer2.0: nn_models.ResBlock/layer2.0.conv: torch.nn.modules.container.Sequential/layer2.0.conv.4: torch.nn.modules.batchnorm.BatchNorm2d/_native_batch_norm_legit_no_training_6: aten._native_batch_norm_legit_no_training.defaultJV
+!pkg.onnxscript.rewriter.rule_name1FuseBatchNormIntoConv, RemoveOptionalBiasFromConvJÑ
+pkg.torch.onnx.class_hierarchy·['nn_models.MediumResNet', 'torch.nn.modules.container.Sequential', 'nn_models.ResBlock', 'torch.nn.modules.container.Sequential', 'torch.nn.modules.batchnorm.BatchNorm2d', 'aten._native_batch_norm_legit_no_training.default']J»
+pkg.torch.onnx.fx_node≠%_native_batch_norm_legit_no_training_6 : [num_users=1] = call_function[target=torch.ops.aten._native_batch_norm_legit_no_training.default](args = (%conv2d_6, %p_layer2_0_conv_4_weight, %p_layer2_0_conv_4_bias, %b_layer2_0_conv_4_running_mean, %b_layer2_0_conv_4_running_var, 0.1, 1e-05), kwargs = {})JÜ
+pkg.torch.onnx.name_scopesh['', 'layer2', 'layer2.0', 'layer2.0.conv', 'layer2.0.conv.4', '_native_batch_norm_legit_no_training_6']J
+pkg.torch.onnx.stack_trace—File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/nn_models.py", line 106, in forward
+    x = self.layer2(x)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/container.py", line 250, in forward
+    input = module(input)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/nn_models.py", line 78, in forward
+    return self.relu(self.conv(x) + self.skip(x))
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/container.py", line 250, in forward
+    input = module(input)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/batchnorm.py", line 193, in forward
+    return F.batch_norm(
+ù
+relu_4
+layer2.0.skip.0.weight
+layer2.0.skip.0.weight_bias
+getitem_21node_Conv_206"Conv*
+group†*
+pads@ @ @ @ †*
+auto_pad"NOTSET†*
+strides@@†*
+	dilations@@†J∏
+	namespace™: nn_models.MediumResNet/layer2: torch.nn.modules.container.Sequential/layer2.0: nn_models.ResBlock/layer2.0.skip: torch.nn.modules.container.Sequential/layer2.0.skip.1: torch.nn.modules.batchnorm.BatchNorm2d/_native_batch_norm_legit_no_training_7: aten._native_batch_norm_legit_no_training.defaultJV
+!pkg.onnxscript.rewriter.rule_name1FuseBatchNormIntoConv, RemoveOptionalBiasFromConvJÑ
+pkg.torch.onnx.class_hierarchy·['nn_models.MediumResNet', 'torch.nn.modules.container.Sequential', 'nn_models.ResBlock', 'torch.nn.modules.container.Sequential', 'torch.nn.modules.batchnorm.BatchNorm2d', 'aten._native_batch_norm_legit_no_training.default']J»
+pkg.torch.onnx.fx_node≠%_native_batch_norm_legit_no_training_7 : [num_users=1] = call_function[target=torch.ops.aten._native_batch_norm_legit_no_training.default](args = (%conv2d_7, %p_layer2_0_skip_1_weight, %p_layer2_0_skip_1_bias, %b_layer2_0_skip_1_running_mean, %b_layer2_0_skip_1_running_var, 0.1, 1e-05), kwargs = {})JÜ
+pkg.torch.onnx.name_scopesh['', 'layer2', 'layer2.0', 'layer2.0.skip', 'layer2.0.skip.1', '_native_batch_norm_legit_no_training_7']J
+pkg.torch.onnx.stack_trace—File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/nn_models.py", line 106, in forward
+    x = self.layer2(x)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/container.py", line 250, in forward
+    input = module(input)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/nn_models.py", line 78, in forward
+    return self.relu(self.conv(x) + self.skip(x))
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/container.py", line 250, in forward
+    input = module(input)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/batchnorm.py", line 193, in forward
+    return F.batch_norm(
+Ì
+
+getitem_18
+
+getitem_21add_7
+node_add_7"AddJá
+	namespacez: nn_models.MediumResNet/layer2: torch.nn.modules.container.Sequential/layer2.0: nn_models.ResBlock/add_7: aten.add.TensorJé
+pkg.torch.onnx.class_hierarchyl['nn_models.MediumResNet', 'torch.nn.modules.container.Sequential', 'nn_models.ResBlock', 'aten.add.Tensor']Jí
+pkg.torch.onnx.fx_nodex%add_7 : [num_users=1] = call_function[target=torch.ops.aten.add.Tensor](args = (%getitem_18, %getitem_21), kwargs = {})JA
+pkg.torch.onnx.name_scopes#['', 'layer2', 'layer2.0', 'add_7']J«
+pkg.torch.onnx.stack_trace®File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/nn_models.py", line 106, in forward
+    x = self.layer2(x)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/container.py", line 250, in forward
+    input = module(input)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/nn_models.py", line 78, in forward
+    return self.relu(self.conv(x) + self.skip(x))
+©
+add_7relu_6node_relu_6"ReluJª
+	namespace≠: nn_models.MediumResNet/layer2: torch.nn.modules.container.Sequential/layer2.0: nn_models.ResBlock/layer2.0.relu: torch.nn.modules.activation.ReLU/relu_6: aten.relu.defaultJµ
+pkg.torch.onnx.class_hierarchyí['nn_models.MediumResNet', 'torch.nn.modules.container.Sequential', 'nn_models.ResBlock', 'torch.nn.modules.activation.ReLU', 'aten.relu.default']JÑ
+pkg.torch.onnx.fx_nodej%relu_6 : [num_users=2] = call_function[target=torch.ops.aten.relu.default](args = (%add_7,), kwargs = {})JS
+pkg.torch.onnx.name_scopes5['', 'layer2', 'layer2.0', 'layer2.0.relu', 'relu_6']J≤
+pkg.torch.onnx.stack_traceìFile "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/nn_models.py", line 106, in forward
+    x = self.layer2(x)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/container.py", line 250, in forward
+    input = module(input)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/nn_models.py", line 78, in forward
+    return self.relu(self.conv(x) + self.skip(x))
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/activation.py", line 144, in forward
+    return F.relu(input, inplace=self.inplace)
+ù
+relu_6
+layer2.1.conv.0.weight
+layer2.1.conv.0.weight_bias
+getitem_24node_Conv_208"Conv*
+group†*
+pads@@@@†*
+auto_pad"NOTSET†*
+strides@@†*
+	dilations@@†J∏
+	namespace™: nn_models.MediumResNet/layer2: torch.nn.modules.container.Sequential/layer2.1: nn_models.ResBlock/layer2.1.conv: torch.nn.modules.container.Sequential/layer2.1.conv.1: torch.nn.modules.batchnorm.BatchNorm2d/_native_batch_norm_legit_no_training_8: aten._native_batch_norm_legit_no_training.defaultJV
+!pkg.onnxscript.rewriter.rule_name1FuseBatchNormIntoConv, RemoveOptionalBiasFromConvJÑ
+pkg.torch.onnx.class_hierarchy·['nn_models.MediumResNet', 'torch.nn.modules.container.Sequential', 'nn_models.ResBlock', 'torch.nn.modules.container.Sequential', 'torch.nn.modules.batchnorm.BatchNorm2d', 'aten._native_batch_norm_legit_no_training.default']J»
+pkg.torch.onnx.fx_node≠%_native_batch_norm_legit_no_training_8 : [num_users=1] = call_function[target=torch.ops.aten._native_batch_norm_legit_no_training.default](args = (%conv2d_8, %p_layer2_1_conv_1_weight, %p_layer2_1_conv_1_bias, %b_layer2_1_conv_1_running_mean, %b_layer2_1_conv_1_running_var, 0.1, 1e-05), kwargs = {})JÜ
+pkg.torch.onnx.name_scopesh['', 'layer2', 'layer2.1', 'layer2.1.conv', 'layer2.1.conv.1', '_native_batch_norm_legit_no_training_8']J
+pkg.torch.onnx.stack_trace—File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/nn_models.py", line 106, in forward
+    x = self.layer2(x)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/container.py", line 250, in forward
+    input = module(input)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/nn_models.py", line 78, in forward
+    return self.relu(self.conv(x) + self.skip(x))
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/container.py", line 250, in forward
+    input = module(input)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/batchnorm.py", line 193, in forward
+    return F.batch_norm(
+˚
+
+getitem_24relu_7node_relu_7"ReluJÚ
+	namespace‰: nn_models.MediumResNet/layer2: torch.nn.modules.container.Sequential/layer2.1: nn_models.ResBlock/layer2.1.conv: torch.nn.modules.container.Sequential/layer2.1.conv.2: torch.nn.modules.activation.ReLU/relu_7: aten.relu.defaultJﬁ
+pkg.torch.onnx.class_hierarchyª['nn_models.MediumResNet', 'torch.nn.modules.container.Sequential', 'nn_models.ResBlock', 'torch.nn.modules.container.Sequential', 'torch.nn.modules.activation.ReLU', 'aten.relu.default']Jâ
+pkg.torch.onnx.fx_nodeo%relu_7 : [num_users=1] = call_function[target=torch.ops.aten.relu.default](args = (%getitem_24,), kwargs = {})Jf
+pkg.torch.onnx.name_scopesH['', 'layer2', 'layer2.1', 'layer2.1.conv', 'layer2.1.conv.2', 'relu_7']Já
+pkg.torch.onnx.stack_traceËFile "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/nn_models.py", line 106, in forward
+    x = self.layer2(x)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/container.py", line 250, in forward
+    input = module(input)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/nn_models.py", line 78, in forward
+    return self.relu(self.conv(x) + self.skip(x))
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/container.py", line 250, in forward
+    input = module(input)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/activation.py", line 144, in forward
+    return F.relu(input, inplace=self.inplace)
+ù
+relu_7
+layer2.1.conv.3.weight
+layer2.1.conv.3.weight_bias
+getitem_27node_Conv_210"Conv*
+group†*
+pads@@@@†*
+auto_pad"NOTSET†*
+strides@@†*
+	dilations@@†J∏
+	namespace™: nn_models.MediumResNet/layer2: torch.nn.modules.container.Sequential/layer2.1: nn_models.ResBlock/layer2.1.conv: torch.nn.modules.container.Sequential/layer2.1.conv.4: torch.nn.modules.batchnorm.BatchNorm2d/_native_batch_norm_legit_no_training_9: aten._native_batch_norm_legit_no_training.defaultJV
+!pkg.onnxscript.rewriter.rule_name1FuseBatchNormIntoConv, RemoveOptionalBiasFromConvJÑ
+pkg.torch.onnx.class_hierarchy·['nn_models.MediumResNet', 'torch.nn.modules.container.Sequential', 'nn_models.ResBlock', 'torch.nn.modules.container.Sequential', 'torch.nn.modules.batchnorm.BatchNorm2d', 'aten._native_batch_norm_legit_no_training.default']J»
+pkg.torch.onnx.fx_node≠%_native_batch_norm_legit_no_training_9 : [num_users=1] = call_function[target=torch.ops.aten._native_batch_norm_legit_no_training.default](args = (%conv2d_9, %p_layer2_1_conv_4_weight, %p_layer2_1_conv_4_bias, %b_layer2_1_conv_4_running_mean, %b_layer2_1_conv_4_running_var, 0.1, 1e-05), kwargs = {})JÜ
+pkg.torch.onnx.name_scopesh['', 'layer2', 'layer2.1', 'layer2.1.conv', 'layer2.1.conv.4', '_native_batch_norm_legit_no_training_9']J
+pkg.torch.onnx.stack_trace—File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/nn_models.py", line 106, in forward
+    x = self.layer2(x)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/container.py", line 250, in forward
+    input = module(input)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/nn_models.py", line 78, in forward
+    return self.relu(self.conv(x) + self.skip(x))
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/container.py", line 250, in forward
+    input = module(input)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/batchnorm.py", line 193, in forward
+    return F.batch_norm(
+Â
+
+getitem_27
+relu_6add_8
+node_add_8"AddJá
+	namespacez: nn_models.MediumResNet/layer2: torch.nn.modules.container.Sequential/layer2.1: nn_models.ResBlock/add_8: aten.add.TensorJé
+pkg.torch.onnx.class_hierarchyl['nn_models.MediumResNet', 'torch.nn.modules.container.Sequential', 'nn_models.ResBlock', 'aten.add.Tensor']Jé
+pkg.torch.onnx.fx_nodet%add_8 : [num_users=1] = call_function[target=torch.ops.aten.add.Tensor](args = (%getitem_27, %relu_6), kwargs = {})JA
+pkg.torch.onnx.name_scopes#['', 'layer2', 'layer2.1', 'add_8']J«
+pkg.torch.onnx.stack_trace®File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/nn_models.py", line 106, in forward
+    x = self.layer2(x)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/container.py", line 250, in forward
+    input = module(input)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/nn_models.py", line 78, in forward
+    return self.relu(self.conv(x) + self.skip(x))
+©
+add_8relu_8node_relu_8"ReluJª
+	namespace≠: nn_models.MediumResNet/layer2: torch.nn.modules.container.Sequential/layer2.1: nn_models.ResBlock/layer2.1.relu: torch.nn.modules.activation.ReLU/relu_8: aten.relu.defaultJµ
+pkg.torch.onnx.class_hierarchyí['nn_models.MediumResNet', 'torch.nn.modules.container.Sequential', 'nn_models.ResBlock', 'torch.nn.modules.activation.ReLU', 'aten.relu.default']JÑ
+pkg.torch.onnx.fx_nodej%relu_8 : [num_users=2] = call_function[target=torch.ops.aten.relu.default](args = (%add_8,), kwargs = {})JS
+pkg.torch.onnx.name_scopes5['', 'layer2', 'layer2.1', 'layer2.1.relu', 'relu_8']J≤
+pkg.torch.onnx.stack_traceìFile "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/nn_models.py", line 106, in forward
+    x = self.layer2(x)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/container.py", line 250, in forward
+    input = module(input)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/nn_models.py", line 78, in forward
+    return self.relu(self.conv(x) + self.skip(x))
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/activation.py", line 144, in forward
+    return F.relu(input, inplace=self.inplace)
+°
+relu_8
+layer3.0.conv.0.weight
+layer3.0.conv.0.weight_bias
+getitem_30node_Conv_212"Conv*
+group†*
+pads@@@@†*
+auto_pad"NOTSET†*
+strides@@†*
+	dilations@@†Jπ
+	namespace´: nn_models.MediumResNet/layer3: torch.nn.modules.container.Sequential/layer3.0: nn_models.ResBlock/layer3.0.conv: torch.nn.modules.container.Sequential/layer3.0.conv.1: torch.nn.modules.batchnorm.BatchNorm2d/_native_batch_norm_legit_no_training_10: aten._native_batch_norm_legit_no_training.defaultJV
+!pkg.onnxscript.rewriter.rule_name1FuseBatchNormIntoConv, RemoveOptionalBiasFromConvJÑ
+pkg.torch.onnx.class_hierarchy·['nn_models.MediumResNet', 'torch.nn.modules.container.Sequential', 'nn_models.ResBlock', 'torch.nn.modules.container.Sequential', 'torch.nn.modules.batchnorm.BatchNorm2d', 'aten._native_batch_norm_legit_no_training.default']J 
+pkg.torch.onnx.fx_nodeØ%_native_batch_norm_legit_no_training_10 : [num_users=1] = call_function[target=torch.ops.aten._native_batch_norm_legit_no_training.default](args = (%conv2d_10, %p_layer3_0_conv_1_weight, %p_layer3_0_conv_1_bias, %b_layer3_0_conv_1_running_mean, %b_layer3_0_conv_1_running_var, 0.1, 1e-05), kwargs = {})Já
+pkg.torch.onnx.name_scopesi['', 'layer3', 'layer3.0', 'layer3.0.conv', 'layer3.0.conv.1', '_native_batch_norm_legit_no_training_10']J
+pkg.torch.onnx.stack_trace—File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/nn_models.py", line 107, in forward
+    x = self.layer3(x)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/container.py", line 250, in forward
+    input = module(input)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/nn_models.py", line 78, in forward
+    return self.relu(self.conv(x) + self.skip(x))
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/container.py", line 250, in forward
+    input = module(input)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/batchnorm.py", line 193, in forward
+    return F.batch_norm(
+˚
+
+getitem_30relu_9node_relu_9"ReluJÚ
+	namespace‰: nn_models.MediumResNet/layer3: torch.nn.modules.container.Sequential/layer3.0: nn_models.ResBlock/layer3.0.conv: torch.nn.modules.container.Sequential/layer3.0.conv.2: torch.nn.modules.activation.ReLU/relu_9: aten.relu.defaultJﬁ
+pkg.torch.onnx.class_hierarchyª['nn_models.MediumResNet', 'torch.nn.modules.container.Sequential', 'nn_models.ResBlock', 'torch.nn.modules.container.Sequential', 'torch.nn.modules.activation.ReLU', 'aten.relu.default']Jâ
+pkg.torch.onnx.fx_nodeo%relu_9 : [num_users=1] = call_function[target=torch.ops.aten.relu.default](args = (%getitem_30,), kwargs = {})Jf
+pkg.torch.onnx.name_scopesH['', 'layer3', 'layer3.0', 'layer3.0.conv', 'layer3.0.conv.2', 'relu_9']Já
+pkg.torch.onnx.stack_traceËFile "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/nn_models.py", line 107, in forward
+    x = self.layer3(x)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/container.py", line 250, in forward
+    input = module(input)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/nn_models.py", line 78, in forward
+    return self.relu(self.conv(x) + self.skip(x))
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/container.py", line 250, in forward
+    input = module(input)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/activation.py", line 144, in forward
+    return F.relu(input, inplace=self.inplace)
+°
+relu_9
+layer3.0.conv.3.weight
+layer3.0.conv.3.weight_bias
+getitem_33node_Conv_214"Conv*
+group†*
+pads@@@@†*
+auto_pad"NOTSET†*
+strides@@†*
+	dilations@@†Jπ
+	namespace´: nn_models.MediumResNet/layer3: torch.nn.modules.container.Sequential/layer3.0: nn_models.ResBlock/layer3.0.conv: torch.nn.modules.container.Sequential/layer3.0.conv.4: torch.nn.modules.batchnorm.BatchNorm2d/_native_batch_norm_legit_no_training_11: aten._native_batch_norm_legit_no_training.defaultJV
+!pkg.onnxscript.rewriter.rule_name1FuseBatchNormIntoConv, RemoveOptionalBiasFromConvJÑ
+pkg.torch.onnx.class_hierarchy·['nn_models.MediumResNet', 'torch.nn.modules.container.Sequential', 'nn_models.ResBlock', 'torch.nn.modules.container.Sequential', 'torch.nn.modules.batchnorm.BatchNorm2d', 'aten._native_batch_norm_legit_no_training.default']J 
+pkg.torch.onnx.fx_nodeØ%_native_batch_norm_legit_no_training_11 : [num_users=1] = call_function[target=torch.ops.aten._native_batch_norm_legit_no_training.default](args = (%conv2d_11, %p_layer3_0_conv_4_weight, %p_layer3_0_conv_4_bias, %b_layer3_0_conv_4_running_mean, %b_layer3_0_conv_4_running_var, 0.1, 1e-05), kwargs = {})Já
+pkg.torch.onnx.name_scopesi['', 'layer3', 'layer3.0', 'layer3.0.conv', 'layer3.0.conv.4', '_native_batch_norm_legit_no_training_11']J
+pkg.torch.onnx.stack_trace—File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/nn_models.py", line 107, in forward
+    x = self.layer3(x)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/container.py", line 250, in forward
+    input = module(input)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/nn_models.py", line 78, in forward
+    return self.relu(self.conv(x) + self.skip(x))
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/container.py", line 250, in forward
+    input = module(input)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/batchnorm.py", line 193, in forward
+    return F.batch_norm(
+°
+relu_8
+layer3.0.skip.0.weight
+layer3.0.skip.0.weight_bias
+getitem_36node_Conv_216"Conv*
+group†*
+pads@ @ @ @ †*
+auto_pad"NOTSET†*
+strides@@†*
+	dilations@@†Jπ
+	namespace´: nn_models.MediumResNet/layer3: torch.nn.modules.container.Sequential/layer3.0: nn_models.ResBlock/layer3.0.skip: torch.nn.modules.container.Sequential/layer3.0.skip.1: torch.nn.modules.batchnorm.BatchNorm2d/_native_batch_norm_legit_no_training_12: aten._native_batch_norm_legit_no_training.defaultJV
+!pkg.onnxscript.rewriter.rule_name1FuseBatchNormIntoConv, RemoveOptionalBiasFromConvJÑ
+pkg.torch.onnx.class_hierarchy·['nn_models.MediumResNet', 'torch.nn.modules.container.Sequential', 'nn_models.ResBlock', 'torch.nn.modules.container.Sequential', 'torch.nn.modules.batchnorm.BatchNorm2d', 'aten._native_batch_norm_legit_no_training.default']J 
+pkg.torch.onnx.fx_nodeØ%_native_batch_norm_legit_no_training_12 : [num_users=1] = call_function[target=torch.ops.aten._native_batch_norm_legit_no_training.default](args = (%conv2d_12, %p_layer3_0_skip_1_weight, %p_layer3_0_skip_1_bias, %b_layer3_0_skip_1_running_mean, %b_layer3_0_skip_1_running_var, 0.1, 1e-05), kwargs = {})Já
+pkg.torch.onnx.name_scopesi['', 'layer3', 'layer3.0', 'layer3.0.skip', 'layer3.0.skip.1', '_native_batch_norm_legit_no_training_12']J
+pkg.torch.onnx.stack_trace—File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/nn_models.py", line 107, in forward
+    x = self.layer3(x)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/container.py", line 250, in forward
+    input = module(input)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/nn_models.py", line 78, in forward
+    return self.relu(self.conv(x) + self.skip(x))
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/container.py", line 250, in forward
+    input = module(input)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/batchnorm.py", line 193, in forward
+    return F.batch_norm(
+Ì
+
+getitem_33
+
+getitem_36add_9
+node_add_9"AddJá
+	namespacez: nn_models.MediumResNet/layer3: torch.nn.modules.container.Sequential/layer3.0: nn_models.ResBlock/add_9: aten.add.TensorJé
+pkg.torch.onnx.class_hierarchyl['nn_models.MediumResNet', 'torch.nn.modules.container.Sequential', 'nn_models.ResBlock', 'aten.add.Tensor']Jí
+pkg.torch.onnx.fx_nodex%add_9 : [num_users=1] = call_function[target=torch.ops.aten.add.Tensor](args = (%getitem_33, %getitem_36), kwargs = {})JA
+pkg.torch.onnx.name_scopes#['', 'layer3', 'layer3.0', 'add_9']J«
+pkg.torch.onnx.stack_trace®File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/nn_models.py", line 107, in forward
+    x = self.layer3(x)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/container.py", line 250, in forward
+    input = module(input)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/nn_models.py", line 78, in forward
+    return self.relu(self.conv(x) + self.skip(x))
+Æ
+add_9relu_10node_relu_10"ReluJº
+	namespaceÆ: nn_models.MediumResNet/layer3: torch.nn.modules.container.Sequential/layer3.0: nn_models.ResBlock/layer3.0.relu: torch.nn.modules.activation.ReLU/relu_10: aten.relu.defaultJµ
+pkg.torch.onnx.class_hierarchyí['nn_models.MediumResNet', 'torch.nn.modules.container.Sequential', 'nn_models.ResBlock', 'torch.nn.modules.activation.ReLU', 'aten.relu.default']JÖ
+pkg.torch.onnx.fx_nodek%relu_10 : [num_users=2] = call_function[target=torch.ops.aten.relu.default](args = (%add_9,), kwargs = {})JT
+pkg.torch.onnx.name_scopes6['', 'layer3', 'layer3.0', 'layer3.0.relu', 'relu_10']J≤
+pkg.torch.onnx.stack_traceìFile "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/nn_models.py", line 107, in forward
+    x = self.layer3(x)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/container.py", line 250, in forward
+    input = module(input)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/nn_models.py", line 78, in forward
+    return self.relu(self.conv(x) + self.skip(x))
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/activation.py", line 144, in forward
+    return F.relu(input, inplace=self.inplace)
+¢
+relu_10
+layer3.1.conv.0.weight
+layer3.1.conv.0.weight_bias
+getitem_39node_Conv_218"Conv*
+group†*
+pads@@@@†*
+auto_pad"NOTSET†*
+strides@@†*
+	dilations@@†Jπ
+	namespace´: nn_models.MediumResNet/layer3: torch.nn.modules.container.Sequential/layer3.1: nn_models.ResBlock/layer3.1.conv: torch.nn.modules.container.Sequential/layer3.1.conv.1: torch.nn.modules.batchnorm.BatchNorm2d/_native_batch_norm_legit_no_training_13: aten._native_batch_norm_legit_no_training.defaultJV
+!pkg.onnxscript.rewriter.rule_name1FuseBatchNormIntoConv, RemoveOptionalBiasFromConvJÑ
+pkg.torch.onnx.class_hierarchy·['nn_models.MediumResNet', 'torch.nn.modules.container.Sequential', 'nn_models.ResBlock', 'torch.nn.modules.container.Sequential', 'torch.nn.modules.batchnorm.BatchNorm2d', 'aten._native_batch_norm_legit_no_training.default']J 
+pkg.torch.onnx.fx_nodeØ%_native_batch_norm_legit_no_training_13 : [num_users=1] = call_function[target=torch.ops.aten._native_batch_norm_legit_no_training.default](args = (%conv2d_13, %p_layer3_1_conv_1_weight, %p_layer3_1_conv_1_bias, %b_layer3_1_conv_1_running_mean, %b_layer3_1_conv_1_running_var, 0.1, 1e-05), kwargs = {})Já
+pkg.torch.onnx.name_scopesi['', 'layer3', 'layer3.1', 'layer3.1.conv', 'layer3.1.conv.1', '_native_batch_norm_legit_no_training_13']J
+pkg.torch.onnx.stack_trace—File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/nn_models.py", line 107, in forward
+    x = self.layer3(x)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/container.py", line 250, in forward
+    input = module(input)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/nn_models.py", line 78, in forward
+    return self.relu(self.conv(x) + self.skip(x))
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/container.py", line 250, in forward
+    input = module(input)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/batchnorm.py", line 193, in forward
+    return F.batch_norm(
+Ä
+
+getitem_39relu_11node_relu_11"ReluJÛ
+	namespaceÂ: nn_models.MediumResNet/layer3: torch.nn.modules.container.Sequential/layer3.1: nn_models.ResBlock/layer3.1.conv: torch.nn.modules.container.Sequential/layer3.1.conv.2: torch.nn.modules.activation.ReLU/relu_11: aten.relu.defaultJﬁ
+pkg.torch.onnx.class_hierarchyª['nn_models.MediumResNet', 'torch.nn.modules.container.Sequential', 'nn_models.ResBlock', 'torch.nn.modules.container.Sequential', 'torch.nn.modules.activation.ReLU', 'aten.relu.default']Jä
+pkg.torch.onnx.fx_nodep%relu_11 : [num_users=1] = call_function[target=torch.ops.aten.relu.default](args = (%getitem_39,), kwargs = {})Jg
+pkg.torch.onnx.name_scopesI['', 'layer3', 'layer3.1', 'layer3.1.conv', 'layer3.1.conv.2', 'relu_11']Já
+pkg.torch.onnx.stack_traceËFile "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/nn_models.py", line 107, in forward
+    x = self.layer3(x)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/container.py", line 250, in forward
+    input = module(input)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/nn_models.py", line 78, in forward
+    return self.relu(self.conv(x) + self.skip(x))
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/container.py", line 250, in forward
+    input = module(input)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/activation.py", line 144, in forward
+    return F.relu(input, inplace=self.inplace)
+¢
+relu_11
+layer3.1.conv.3.weight
+layer3.1.conv.3.weight_bias
+getitem_42node_Conv_220"Conv*
+group†*
+pads@@@@†*
+auto_pad"NOTSET†*
+strides@@†*
+	dilations@@†Jπ
+	namespace´: nn_models.MediumResNet/layer3: torch.nn.modules.container.Sequential/layer3.1: nn_models.ResBlock/layer3.1.conv: torch.nn.modules.container.Sequential/layer3.1.conv.4: torch.nn.modules.batchnorm.BatchNorm2d/_native_batch_norm_legit_no_training_14: aten._native_batch_norm_legit_no_training.defaultJV
+!pkg.onnxscript.rewriter.rule_name1FuseBatchNormIntoConv, RemoveOptionalBiasFromConvJÑ
+pkg.torch.onnx.class_hierarchy·['nn_models.MediumResNet', 'torch.nn.modules.container.Sequential', 'nn_models.ResBlock', 'torch.nn.modules.container.Sequential', 'torch.nn.modules.batchnorm.BatchNorm2d', 'aten._native_batch_norm_legit_no_training.default']J 
+pkg.torch.onnx.fx_nodeØ%_native_batch_norm_legit_no_training_14 : [num_users=1] = call_function[target=torch.ops.aten._native_batch_norm_legit_no_training.default](args = (%conv2d_14, %p_layer3_1_conv_4_weight, %p_layer3_1_conv_4_bias, %b_layer3_1_conv_4_running_mean, %b_layer3_1_conv_4_running_var, 0.1, 1e-05), kwargs = {})Já
+pkg.torch.onnx.name_scopesi['', 'layer3', 'layer3.1', 'layer3.1.conv', 'layer3.1.conv.4', '_native_batch_norm_legit_no_training_14']J
+pkg.torch.onnx.stack_trace—File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/nn_models.py", line 107, in forward
+    x = self.layer3(x)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/container.py", line 250, in forward
+    input = module(input)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/nn_models.py", line 78, in forward
+    return self.relu(self.conv(x) + self.skip(x))
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/container.py", line 250, in forward
+    input = module(input)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/batchnorm.py", line 193, in forward
+    return F.batch_norm(
+Ï
+
+getitem_42
+relu_10add_10node_add_10"AddJà
+	namespace{: nn_models.MediumResNet/layer3: torch.nn.modules.container.Sequential/layer3.1: nn_models.ResBlock/add_10: aten.add.TensorJé
+pkg.torch.onnx.class_hierarchyl['nn_models.MediumResNet', 'torch.nn.modules.container.Sequential', 'nn_models.ResBlock', 'aten.add.Tensor']Jê
+pkg.torch.onnx.fx_nodev%add_10 : [num_users=1] = call_function[target=torch.ops.aten.add.Tensor](args = (%getitem_42, %relu_10), kwargs = {})JB
+pkg.torch.onnx.name_scopes$['', 'layer3', 'layer3.1', 'add_10']J«
+pkg.torch.onnx.stack_trace®File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/nn_models.py", line 107, in forward
+    x = self.layer3(x)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/container.py", line 250, in forward
+    input = module(input)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/nn_models.py", line 78, in forward
+    return self.relu(self.conv(x) + self.skip(x))
+∞
+add_10relu_12node_relu_12"ReluJº
+	namespaceÆ: nn_models.MediumResNet/layer3: torch.nn.modules.container.Sequential/layer3.1: nn_models.ResBlock/layer3.1.relu: torch.nn.modules.activation.ReLU/relu_12: aten.relu.defaultJµ
+pkg.torch.onnx.class_hierarchyí['nn_models.MediumResNet', 'torch.nn.modules.container.Sequential', 'nn_models.ResBlock', 'torch.nn.modules.activation.ReLU', 'aten.relu.default']JÜ
+pkg.torch.onnx.fx_nodel%relu_12 : [num_users=1] = call_function[target=torch.ops.aten.relu.default](args = (%add_10,), kwargs = {})JT
+pkg.torch.onnx.name_scopes6['', 'layer3', 'layer3.1', 'layer3.1.relu', 'relu_12']J≤
+pkg.torch.onnx.stack_traceìFile "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/nn_models.py", line 107, in forward
+    x = self.layer3(x)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/container.py", line 250, in forward
+    input = module(input)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/nn_models.py", line 78, in forward
+    return self.relu(self.conv(x) + self.skip(x))
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/activation.py", line 144, in forward
+    return F.relu(input, inplace=self.inplace)
+ª
+relu_12
+val_140mean	node_mean"
+ReduceMean*
+noop_with_empty_axes †*
+keepdims†Jj
+	namespace]: nn_models.MediumResNet/pool: torch.nn.modules.pooling.AdaptiveAvgPool2d/mean: aten.mean.dimJ{
+pkg.torch.onnx.class_hierarchyY['nn_models.MediumResNet', 'torch.nn.modules.pooling.AdaptiveAvgPool2d', 'aten.mean.dim']Jè
+pkg.torch.onnx.fx_nodeu%mean : [num_users=1] = call_function[target=torch.ops.aten.mean.dim](args = (%relu_12, [-1, -2], True), kwargs = {})J2
+pkg.torch.onnx.name_scopes['', 'pool', 'mean']J¨
+pkg.torch.onnx.stack_traceçFile "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/nn_models.py", line 108, in forward
+    x = self.pool(x)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/pooling.py", line 1500, in forward
+    return F.adaptive_avg_pool2d(input, self.output_size)
+À	
+mean
+val_144view	node_view"Reshape*
+	allowzero†Jì
+	namespaceÖ: nn_models.MediumResNet/head: torch.nn.modules.container.Sequential/head.0: torch.nn.modules.flatten.Flatten/view: aten.view.defaultJû
+pkg.torch.onnx.class_hierarchy|['nn_models.MediumResNet', 'torch.nn.modules.container.Sequential', 'torch.nn.modules.flatten.Flatten', 'aten.view.default']Jä
+pkg.torch.onnx.fx_nodep%view : [num_users=1] = call_function[target=torch.ops.aten.view.default](args = (%mean, [1, 256]), kwargs = {})J<
+pkg.torch.onnx.name_scopes['', 'head', 'head.0', 'view']Jã
+pkg.torch.onnx.stack_traceÏFile "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/nn_models.py", line 109, in forward
+    return self.head(x).squeeze(-1)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/container.py", line 250, in forward
+    input = module(input)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/flatten.py", line 56, in forward
+    return input.flatten(self.start_dim, self.end_dim)
+©
+
+view
+head.1.weight
+head.1.biaslinearnode_linear"Gemm*
+beta  Ä?†*
+transB†*
+alpha  Ä?†*
+transA †Jï
+	namespaceá: nn_models.MediumResNet/head: torch.nn.modules.container.Sequential/head.1: torch.nn.modules.linear.Linear/linear: aten.linear.defaultJû
+pkg.torch.onnx.class_hierarchy|['nn_models.MediumResNet', 'torch.nn.modules.container.Sequential', 'torch.nn.modules.linear.Linear', 'aten.linear.default']Jß
+pkg.torch.onnx.fx_nodeå%linear : [num_users=1] = call_function[target=torch.ops.aten.linear.default](args = (%view, %p_head_1_weight, %p_head_1_bias), kwargs = {})J>
+pkg.torch.onnx.name_scopes ['', 'head', 'head.1', 'linear']Já
+pkg.torch.onnx.stack_traceËFile "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/nn_models.py", line 109, in forward
+    return self.head(x).squeeze(-1)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/container.py", line 250, in forward
+    input = module(input)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/linear.py", line 134, in forward
+    return F.linear(input, self.weight, self.bias)
+≥	
+linearrelu_13node_relu_13"ReluJñ
+	namespaceà: nn_models.MediumResNet/head: torch.nn.modules.container.Sequential/head.2: torch.nn.modules.activation.ReLU/relu_13: aten.relu.defaultJû
+pkg.torch.onnx.class_hierarchy|['nn_models.MediumResNet', 'torch.nn.modules.container.Sequential', 'torch.nn.modules.activation.ReLU', 'aten.relu.default']JÜ
+pkg.torch.onnx.fx_nodel%relu_13 : [num_users=1] = call_function[target=torch.ops.aten.relu.default](args = (%linear,), kwargs = {})J?
+pkg.torch.onnx.name_scopes!['', 'head', 'head.2', 'relu_13']Já
+pkg.torch.onnx.stack_traceËFile "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/nn_models.py", line 109, in forward
+    return self.head(x).squeeze(-1)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/container.py", line 250, in forward
+    input = module(input)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/activation.py", line 144, in forward
+    return F.relu(input, inplace=self.inplace)
+∑
+
+relu_13
+head.4.weight
+head.4.biaslinear_1node_linear_1"Gemm*
+beta  Ä?†*
+transB†*
+alpha  Ä?†*
+transA †Jó
+	namespaceâ: nn_models.MediumResNet/head: torch.nn.modules.container.Sequential/head.4: torch.nn.modules.linear.Linear/linear_1: aten.linear.defaultJû
+pkg.torch.onnx.class_hierarchy|['nn_models.MediumResNet', 'torch.nn.modules.container.Sequential', 'torch.nn.modules.linear.Linear', 'aten.linear.default']J™
+pkg.torch.onnx.fx_nodeè%linear_1 : [num_users=1] = call_function[target=torch.ops.aten.linear.default](args = (%clone, %p_head_4_weight, %p_head_4_bias), kwargs = {})J@
+pkg.torch.onnx.name_scopes"['', 'head', 'head.4', 'linear_1']Já
+pkg.torch.onnx.stack_traceËFile "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/nn_models.py", line 109, in forward
+    return self.head(x).squeeze(-1)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/container.py", line 250, in forward
+    input = module(input)
+  File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/.venv/lib/python3.12/site-packages/torch/nn/modules/linear.py", line 134, in forward
+    return F.linear(input, self.weight, self.bias)
+Œ
+linear_1
+val_145	advantagenode_squeeze"SqueezeJ?
+	namespace2: nn_models.MediumResNet/squeeze: aten.squeeze.dimJP
+pkg.torch.onnx.class_hierarchy.['nn_models.MediumResNet', 'aten.squeeze.dim']Jä
+pkg.torch.onnx.fx_nodep%squeeze : [num_users=1] = call_function[target=torch.ops.aten.squeeze.dim](args = (%linear_1, -1), kwargs = {})J-
+pkg.torch.onnx.name_scopes['', 'squeeze']J«
+pkg.torch.onnx.stack_trace®File "/home/jx/projects/machine-learning-zoomcamp-2025/machine-learning-zoomcamp-2025-capstone-2/nn_models.py", line 109, in forward
+    return self.head(x).squeeze(-1)
+main_graph*@Bstem.0.weightj@
+location4chess_eval-full_data-medium_model-2_epochs.onnx.dataj
+offset41472j
+length34560p*ä@@Blayer1.0.conv.0.weightj@
+location4chess_eval-full_data-medium_model-2_epochs.onnx.dataj
+offset338176j
+length147456p*ä@@Blayer1.0.conv.3.weightj@
+location4chess_eval-full_data-medium_model-2_epochs.onnx.dataj
+offset485632j
+length147456p*ä@@Blayer1.1.conv.0.weightj@
+location4chess_eval-full_data-medium_model-2_epochs.onnx.dataj
+offset633088j
+length147456p*ä@@Blayer1.1.conv.3.weightj@
+location4chess_eval-full_data-medium_model-2_epochs.onnx.dataj
+offset780544j
+length147456p*ãÄ@Blayer2.0.conv.0.weightj@
+location4chess_eval-full_data-medium_model-2_epochs.onnx.dataj
+offset928000j
+length294912p*çÄÄBlayer2.0.conv.3.weightj@
+location4chess_eval-full_data-medium_model-2_epochs.onnx.dataj
+offset1222912j
+length589824p*àÄ@Blayer2.0.skip.0.weightj@
+location4chess_eval-full_data-medium_model-2_epochs.onnx.dataj
+offset8704j
+length32768p*çÄÄBlayer2.1.conv.0.weightj@
+location4chess_eval-full_data-medium_model-2_epochs.onnx.dataj
+offset1812736j
+length589824p*çÄÄBlayer2.1.conv.3.weightj@
+location4chess_eval-full_data-medium_model-2_epochs.onnx.dataj
+offset2402560j
+length589824p*éÄÄBlayer3.0.conv.0.weightj@
+location4chess_eval-full_data-medium_model-2_epochs.onnx.dataj
+offset3014656j
+length1179648p*éÄÄBlayer3.0.conv.3.weightj@
+location4chess_eval-full_data-medium_model-2_epochs.onnx.dataj
+offset4194304j
+length2359296p*ãÄÄBlayer3.0.skip.0.weightj@
+location4chess_eval-full_data-medium_model-2_epochs.onnx.dataj
+offset76032j
+length131072p*éÄÄBlayer3.1.conv.0.weightj@
+location4chess_eval-full_data-medium_model-2_epochs.onnx.dataj
+offset6553600j
+length2359296p*éÄÄBlayer3.1.conv.3.weightj@
+location4chess_eval-full_data-medium_model-2_epochs.onnx.dataj
+offset8912896j
+length2359296p*ÄÄBhead.1.weightj@
+location4chess_eval-full_data-medium_model-2_epochs.onnx.dataj
+offset207104j
+length131072p*rÄBhead.1.biasj@
+location4chess_eval-full_data-medium_model-2_epochs.onnx.dataj
+offset0j
+length512p*xÄBhead.4.weightj@
+location4chess_eval-full_data-medium_model-2_epochs.onnx.dataj
+offset512j
+length512p*Bhead.4.biasJ∑ÎΩ*Bval_140Jˇˇˇˇˇˇˇˇ˛ˇˇˇˇˇˇˇ*Bval_144J              *õ@Bstem.0.weight_biasJÄW¥≈>®%É<r\ØΩ5µ‘Ω7”M>≈>ØÑ6>àÌüæ˙Î§æ˜=v>º ø 8óæ÷ÖóΩ‘∂æºı]=˛ÊGæ}˙m>!kY>ä˝¢æõ+æ@¥æ=¸õ=u≤≥æÿÎ+æÄ;>« ƒΩPøª“	ì>…Ó¸>5+à=˘◊â>H∏≈æ&?´=§I3æóÈ;Ω§üæ,]õΩC8>!læ^®ºÆ√ﬁ=L°‡=ﬁÅ1æIÈæ—kÖæúΩ®=tóæY≈=aVæºf=TQΩå¨Fæv7>ÃR‡=`{hæ[≠è=_R<mÇO=E`>e%Œ=»¥¸ΩñŸø$˚m>Ï–Ω*§@Blayer1.0.conv.0.weight_biasJÄÕ≠?pÛ>∑FH=˜ôT?æYæÎu?’~Ïøˆm"æ\ s=⁄O>ÖªÍ>Ñ?zø∆¯>öi?$*Ã=>æÁ<ô±%?t.Å>GÅã>ÄF?ÇfG><|?¯!ßæjﬂsΩZ∂r>Ãï?CÒÖ?º~*øXW#>3“•øgâæø2` ?µèË>Ãgçø*v?‡†>Í+Ê>:9O=ñ£Ù>¬*ÖæoÍ‡>nO=`˚lø÷“nøÿàË>Ùàìø
+–Ωı∫6?|M??5ì	?8m'æ˜#?‰põ=ßó>±0˛>–êÖ<<^ ?“=ÚÂ$>ùm?P`ãæúüΩ1°ø*§@Blayer1.0.conv.3.weight_biasJÄ• ?˙ ç>ê&¨æÑ≠pø˘=ç>%ÿæ øÅı»>H±ó>ΩÂØ?±πëæÁßàæämû?áò™?ûFc?€ó9øÃñ>E›Î>
+{=iÙd?j;„>H*@º;Õéæƒd?¨k|æƒnã??p'ÈΩÙ)>ΩŸ“æ…ıà>Æü?l¥ø¯	?tsø‡¡Oøº˛æ2<ølß¿<
+£øˆ•??$B@?¢˜^?®kôºHÄøŒèÿæ—Ù´æÕﬂ>˛Vø√Nø\øQëø⁄‚6?»Øk?Î+"ø©º"?G?üd<?uΩ“æ9f?«πæØl?Ä‚ö? 3r=*§@Blayer1.1.conv.0.weight_biasJÄO√Ω€6åø`t?]Éı>§[ıæ"ºÑ?“cΩ=6V>>¿ÁD?‡*?">éßb?JTqæt8ôøHæ]æ|+üºè«…>d'«>ßD?ÂÉøuß?ò;î>Ÿ«ìæû⁄k>¨ª˝>yUﬁæ?d?íµUøãÜ∏>?äøıOïæ|*X?
+@Ù>πRá>ƒ∞â?tlø+√D?Qî+?ÀÈP?°_—=±&8øIdêøó¥ øcN=¥hÃ>0Fò>ï?˙Ï1æ=B?FDø‘£>l”øÿÄ?!ù?@øˇ¢ç>={Ñ?Úp…>í÷‡?ú€æA£>µÇø&‡∏>cµBø*§@Blayer1.1.conv.3.weight_biasJÄ!°?†;øÙÉÑæ√´Ä>¶‰9?‡•¬>†Îøæ›öøæ†¬6>«ƒM?iø
+∂ ?Oé…>≠⁄∑>[PÛ>Lí‡>Á∂>V÷A>éD”>_`ì> 3ò?ª¶2ø]=âgƒ? s∂øKœœ=Ú©?⁄\øºÜ~øRg?åÅø Ñø≈Öeæ≠‰	æPêá>_∞O?ºEπ>≠œ≠>Fg∏>6øâ Ÿ>™†öæ."$Ωi	øæâÙáøGØ>Ú8*=x}L?ÄØƒ>Çü3øb¨ø∏Ó?-l{?<ãWøä©KæJü$øL>Ñ=≤	À=~÷?=ïë??ŸºÆwæŒmæ£S•>*ÖÄBlayer2.0.conv.0.weight_biasj@
+location4chess_eval-full_data-medium_model-2_epochs.onnx.dataj
+offset1024j
+length512p*ÖÄBlayer2.0.conv.3.weight_biasj@
+location4chess_eval-full_data-medium_model-2_epochs.onnx.dataj
+offset1536j
+length512p*ÖÄBlayer2.0.skip.0.weight_biasj@
+location4chess_eval-full_data-medium_model-2_epochs.onnx.dataj
+offset2048j
+length512p*ÖÄBlayer2.1.conv.0.weight_biasj@
+location4chess_eval-full_data-medium_model-2_epochs.onnx.dataj
+offset2560j
+length512p*ÖÄBlayer2.1.conv.3.weight_biasj@
+location4chess_eval-full_data-medium_model-2_epochs.onnx.dataj
+offset3072j
+length512p*ÜÄBlayer3.0.conv.0.weight_biasj@
+location4chess_eval-full_data-medium_model-2_epochs.onnx.dataj
+offset3584j
+length1024p*ÜÄBlayer3.0.conv.3.weight_biasj@
+location4chess_eval-full_data-medium_model-2_epochs.onnx.dataj
+offset4608j
+length1024p*ÜÄBlayer3.0.skip.0.weight_biasj@
+location4chess_eval-full_data-medium_model-2_epochs.onnx.dataj
+offset5632j
+length1024p*ÜÄBlayer3.1.conv.0.weight_biasj@
+location4chess_eval-full_data-medium_model-2_epochs.onnx.dataj
+offset6656j
+length1024p*ÜÄBlayer3.1.conv.3.weight_biasj@
+location4chess_eval-full_data-medium_model-2_epochs.onnx.dataj
+offset7680j
+length1024p*Bval_145JˇˇˇˇˇˇˇˇZ»
+board
+
+s77
+
+
+"=
+/pkg.torch.export.graph_signature.InputSpec.kind
+USER_INPUT"=
+5pkg.torch.export.graph_signature.InputSpec.persistentNone"&
+!pkg.torch.onnx.original_node_namexbÜ
+	advantage
+
+
+"?
+0pkg.torch.export.graph_signature.OutputSpec.kindUSER_OUTPUT",
+!pkg.torch.onnx.original_node_namesqueezej'
+stem.0.weight
+
+@
+
+
+j0
+layer1.0.conv.0.weight
+
+@
+@
+
+j0
+layer1.0.conv.3.weight
+
+@
+@
+
+j0
+layer1.1.conv.0.weight
+
+@
+@
+
+j0
+layer1.1.conv.3.weight
+
+@
+@
+
+j1
+layer2.0.conv.0.weight
+
+Ä
+@
+
+j2
+layer2.0.conv.3.weight
+
+Ä
+Ä
+
+j1
+layer2.0.skip.0.weight
+
+Ä
+@
+
+j2
+layer2.1.conv.0.weight
+
+Ä
+Ä
+
+j2
+layer2.1.conv.3.weight
+
+Ä
+Ä
+
+j2
+layer3.0.conv.0.weight
+
+Ä
+Ä
+
+j2
+layer3.0.conv.3.weight
+
+Ä
+Ä
+
+j2
+layer3.0.skip.0.weight
+
+Ä
+Ä
+
+j2
+layer3.1.conv.0.weight
+
+Ä
+Ä
+
+j2
+layer3.1.conv.3.weight
+
+Ä
+Ä
+
+j‘
+head.1.weight
+
+
+Ä
+Ä"<
+/pkg.torch.export.graph_signature.InputSpec.kind	PARAMETER"=
+5pkg.torch.export.graph_signature.InputSpec.persistentNone"4
+!pkg.torch.onnx.original_node_namep_head_1_weightjÀ
+head.1.bias
+	
+Ä"<
+/pkg.torch.export.graph_signature.InputSpec.kind	PARAMETER"=
+5pkg.torch.export.graph_signature.InputSpec.persistentNone"2
+!pkg.torch.onnx.original_node_namep_head_1_biasj”
+head.4.weight
+	
+
+Ä"<
+/pkg.torch.export.graph_signature.InputSpec.kind	PARAMETER"=
+5pkg.torch.export.graph_signature.InputSpec.persistentNone"4
+!pkg.torch.onnx.original_node_namep_head_4_weightj 
+head.4.bias
+
+
+"<
+/pkg.torch.export.graph_signature.InputSpec.kind	PARAMETER"=
+5pkg.torch.export.graph_signature.InputSpec.persistentNone"2
+!pkg.torch.onnx.original_node_namep_head_4_biasjU
+val_140
+
+
+">
+$pkg.onnxscript.optimizer.folded_from['val_138', 'val_139']jU
+val_144
+
+
+">
+$pkg.onnxscript.optimizer.folded_from['val_142', 'val_143']j 
+stem.0.weight_bias
+
+
+@j)
+layer1.0.conv.0.weight_bias
+
+
+@j)
+layer1.0.conv.3.weight_bias
+
+
+@j)
+layer1.1.conv.0.weight_bias
+
+
+@j)
+layer1.1.conv.3.weight_bias
+
+
+@j*
+layer2.0.conv.0.weight_bias
+	
+Äj*
+layer2.0.conv.3.weight_bias
+	
+Äj*
+layer2.0.skip.0.weight_bias
+	
+Äj*
+layer2.1.conv.0.weight_bias
+	
+Äj*
+layer2.1.conv.3.weight_bias
+	
+Äj*
+layer3.0.conv.0.weight_bias
+	
+Äj*
+layer3.0.conv.3.weight_bias
+	
+Äj*
+layer3.0.skip.0.weight_bias
+	
+Äj*
+layer3.1.conv.0.weight_bias
+	
+Äj*
+layer3.1.conv.3.weight_bias
+	
+Äj
+val_145
+
+
+j!
+getitem
+
+
+@
+
+j
+relu
+
+
+@
+
+j#
+	getitem_3
+
+
+@
+
+j 
+relu_1
+
+
+@
+
+j#
+	getitem_6
+
+
+@
+
+j
+add_5
+
+
+@
+
+j 
+relu_2
+
+
+@
+
+j#
+	getitem_9
+
+
+@
+
+j 
+relu_3
+
+
+@
+
+j$
+
+getitem_12
+
+
+@
+
+j
+add_6
+
+
+@
+
+j 
+relu_4
+
+
+@
+
+j%
+
+getitem_15
+
+
+Ä
+
+j!
+relu_5
+
+
+Ä
+
+j%
+
+getitem_18
+
+
+Ä
+
+j%
+
+getitem_21
+
+
+Ä
+
+j 
+add_7
+
+
+Ä
+
+j!
+relu_6
+
+
+Ä
+
+j%
+
+getitem_24
+
+
+Ä
+
+j!
+relu_7
+
+
+Ä
+
+j%
+
+getitem_27
+
+
+Ä
+
+j 
+add_8
+
+
+Ä
+
+j!
+relu_8
+
+
+Ä
+
+j%
+
+getitem_30
+
+
+Ä
+
+j!
+relu_9
+
+
+Ä
+
+j%
+
+getitem_33
+
+
+Ä
+
+j%
+
+getitem_36
+
+
+Ä
+
+j 
+add_9
+
+
+Ä
+
+j"
+relu_10
+
+
+Ä
+
+j%
+
+getitem_39
+
+
+Ä
+
+j"
+relu_11
+
+
+Ä
+
+j%
+
+getitem_42
+
+
+Ä
+
+j!
+add_10
+
+
+Ä
+
+j"
+relu_12
+
+
+Ä
+
+j
+mean
+
+
+Ä
+
+j
+view
+	
+
+Äj
+linear
+	
+
+Äj
+relu_13
+	
+
+Äj
+linear_1
+
+
+ÇÜ;
+0pkg.torch.export.ExportedProgram.graph_signature—:
+# inputs
+p_stem_0_weight: PARAMETER target='stem.0.weight'
+p_stem_1_weight: PARAMETER target='stem.1.weight'
+p_stem_1_bias: PARAMETER target='stem.1.bias'
+p_layer1_0_conv_0_weight: PARAMETER target='layer1.0.conv.0.weight'
+p_layer1_0_conv_1_weight: PARAMETER target='layer1.0.conv.1.weight'
+p_layer1_0_conv_1_bias: PARAMETER target='layer1.0.conv.1.bias'
+p_layer1_0_conv_3_weight: PARAMETER target='layer1.0.conv.3.weight'
+p_layer1_0_conv_4_weight: PARAMETER target='layer1.0.conv.4.weight'
+p_layer1_0_conv_4_bias: PARAMETER target='layer1.0.conv.4.bias'
+p_layer1_1_conv_0_weight: PARAMETER target='layer1.1.conv.0.weight'
+p_layer1_1_conv_1_weight: PARAMETER target='layer1.1.conv.1.weight'
+p_layer1_1_conv_1_bias: PARAMETER target='layer1.1.conv.1.bias'
+p_layer1_1_conv_3_weight: PARAMETER target='layer1.1.conv.3.weight'
+p_layer1_1_conv_4_weight: PARAMETER target='layer1.1.conv.4.weight'
+p_layer1_1_conv_4_bias: PARAMETER target='layer1.1.conv.4.bias'
+p_layer2_0_conv_0_weight: PARAMETER target='layer2.0.conv.0.weight'
+p_layer2_0_conv_1_weight: PARAMETER target='layer2.0.conv.1.weight'
+p_layer2_0_conv_1_bias: PARAMETER target='layer2.0.conv.1.bias'
+p_layer2_0_conv_3_weight: PARAMETER target='layer2.0.conv.3.weight'
+p_layer2_0_conv_4_weight: PARAMETER target='layer2.0.conv.4.weight'
+p_layer2_0_conv_4_bias: PARAMETER target='layer2.0.conv.4.bias'
+p_layer2_0_skip_0_weight: PARAMETER target='layer2.0.skip.0.weight'
+p_layer2_0_skip_1_weight: PARAMETER target='layer2.0.skip.1.weight'
+p_layer2_0_skip_1_bias: PARAMETER target='layer2.0.skip.1.bias'
+p_layer2_1_conv_0_weight: PARAMETER target='layer2.1.conv.0.weight'
+p_layer2_1_conv_1_weight: PARAMETER target='layer2.1.conv.1.weight'
+p_layer2_1_conv_1_bias: PARAMETER target='layer2.1.conv.1.bias'
+p_layer2_1_conv_3_weight: PARAMETER target='layer2.1.conv.3.weight'
+p_layer2_1_conv_4_weight: PARAMETER target='layer2.1.conv.4.weight'
+p_layer2_1_conv_4_bias: PARAMETER target='layer2.1.conv.4.bias'
+p_layer3_0_conv_0_weight: PARAMETER target='layer3.0.conv.0.weight'
+p_layer3_0_conv_1_weight: PARAMETER target='layer3.0.conv.1.weight'
+p_layer3_0_conv_1_bias: PARAMETER target='layer3.0.conv.1.bias'
+p_layer3_0_conv_3_weight: PARAMETER target='layer3.0.conv.3.weight'
+p_layer3_0_conv_4_weight: PARAMETER target='layer3.0.conv.4.weight'
+p_layer3_0_conv_4_bias: PARAMETER target='layer3.0.conv.4.bias'
+p_layer3_0_skip_0_weight: PARAMETER target='layer3.0.skip.0.weight'
+p_layer3_0_skip_1_weight: PARAMETER target='layer3.0.skip.1.weight'
+p_layer3_0_skip_1_bias: PARAMETER target='layer3.0.skip.1.bias'
+p_layer3_1_conv_0_weight: PARAMETER target='layer3.1.conv.0.weight'
+p_layer3_1_conv_1_weight: PARAMETER target='layer3.1.conv.1.weight'
+p_layer3_1_conv_1_bias: PARAMETER target='layer3.1.conv.1.bias'
+p_layer3_1_conv_3_weight: PARAMETER target='layer3.1.conv.3.weight'
+p_layer3_1_conv_4_weight: PARAMETER target='layer3.1.conv.4.weight'
+p_layer3_1_conv_4_bias: PARAMETER target='layer3.1.conv.4.bias'
+p_head_1_weight: PARAMETER target='head.1.weight'
+p_head_1_bias: PARAMETER target='head.1.bias'
+p_head_4_weight: PARAMETER target='head.4.weight'
+p_head_4_bias: PARAMETER target='head.4.bias'
+b_stem_1_running_mean: BUFFER target='stem.1.running_mean' persistent=True
+b_stem_1_running_var: BUFFER target='stem.1.running_var' persistent=True
+b_stem_1_num_batches_tracked: BUFFER target='stem.1.num_batches_tracked' persistent=True
+b_layer1_0_conv_1_running_mean: BUFFER target='layer1.0.conv.1.running_mean' persistent=True
+b_layer1_0_conv_1_running_var: BUFFER target='layer1.0.conv.1.running_var' persistent=True
+b_layer1_0_conv_1_num_batches_tracked: BUFFER target='layer1.0.conv.1.num_batches_tracked' persistent=True
+b_layer1_0_conv_4_running_mean: BUFFER target='layer1.0.conv.4.running_mean' persistent=True
+b_layer1_0_conv_4_running_var: BUFFER target='layer1.0.conv.4.running_var' persistent=True
+b_layer1_0_conv_4_num_batches_tracked: BUFFER target='layer1.0.conv.4.num_batches_tracked' persistent=True
+b_layer1_1_conv_1_running_mean: BUFFER target='layer1.1.conv.1.running_mean' persistent=True
+b_layer1_1_conv_1_running_var: BUFFER target='layer1.1.conv.1.running_var' persistent=True
+b_layer1_1_conv_1_num_batches_tracked: BUFFER target='layer1.1.conv.1.num_batches_tracked' persistent=True
+b_layer1_1_conv_4_running_mean: BUFFER target='layer1.1.conv.4.running_mean' persistent=True
+b_layer1_1_conv_4_running_var: BUFFER target='layer1.1.conv.4.running_var' persistent=True
+b_layer1_1_conv_4_num_batches_tracked: BUFFER target='layer1.1.conv.4.num_batches_tracked' persistent=True
+b_layer2_0_conv_1_running_mean: BUFFER target='layer2.0.conv.1.running_mean' persistent=True
+b_layer2_0_conv_1_running_var: BUFFER target='layer2.0.conv.1.running_var' persistent=True
+b_layer2_0_conv_1_num_batches_tracked: BUFFER target='layer2.0.conv.1.num_batches_tracked' persistent=True
+b_layer2_0_conv_4_running_mean: BUFFER target='layer2.0.conv.4.running_mean' persistent=True
+b_layer2_0_conv_4_running_var: BUFFER target='layer2.0.conv.4.running_var' persistent=True
+b_layer2_0_conv_4_num_batches_tracked: BUFFER target='layer2.0.conv.4.num_batches_tracked' persistent=True
+b_layer2_0_skip_1_running_mean: BUFFER target='layer2.0.skip.1.running_mean' persistent=True
+b_layer2_0_skip_1_running_var: BUFFER target='layer2.0.skip.1.running_var' persistent=True
+b_layer2_0_skip_1_num_batches_tracked: BUFFER target='layer2.0.skip.1.num_batches_tracked' persistent=True
+b_layer2_1_conv_1_running_mean: BUFFER target='layer2.1.conv.1.running_mean' persistent=True
+b_layer2_1_conv_1_running_var: BUFFER target='layer2.1.conv.1.running_var' persistent=True
+b_layer2_1_conv_1_num_batches_tracked: BUFFER target='layer2.1.conv.1.num_batches_tracked' persistent=True
+b_layer2_1_conv_4_running_mean: BUFFER target='layer2.1.conv.4.running_mean' persistent=True
+b_layer2_1_conv_4_running_var: BUFFER target='layer2.1.conv.4.running_var' persistent=True
+b_layer2_1_conv_4_num_batches_tracked: BUFFER target='layer2.1.conv.4.num_batches_tracked' persistent=True
+b_layer3_0_conv_1_running_mean: BUFFER target='layer3.0.conv.1.running_mean' persistent=True
+b_layer3_0_conv_1_running_var: BUFFER target='layer3.0.conv.1.running_var' persistent=True
+b_layer3_0_conv_1_num_batches_tracked: BUFFER target='layer3.0.conv.1.num_batches_tracked' persistent=True
+b_layer3_0_conv_4_running_mean: BUFFER target='layer3.0.conv.4.running_mean' persistent=True
+b_layer3_0_conv_4_running_var: BUFFER target='layer3.0.conv.4.running_var' persistent=True
+b_layer3_0_conv_4_num_batches_tracked: BUFFER target='layer3.0.conv.4.num_batches_tracked' persistent=True
+b_layer3_0_skip_1_running_mean: BUFFER target='layer3.0.skip.1.running_mean' persistent=True
+b_layer3_0_skip_1_running_var: BUFFER target='layer3.0.skip.1.running_var' persistent=True
+b_layer3_0_skip_1_num_batches_tracked: BUFFER target='layer3.0.skip.1.num_batches_tracked' persistent=True
+b_layer3_1_conv_1_running_mean: BUFFER target='layer3.1.conv.1.running_mean' persistent=True
+b_layer3_1_conv_1_running_var: BUFFER target='layer3.1.conv.1.running_var' persistent=True
+b_layer3_1_conv_1_num_batches_tracked: BUFFER target='layer3.1.conv.1.num_batches_tracked' persistent=True
+b_layer3_1_conv_4_running_mean: BUFFER target='layer3.1.conv.4.running_mean' persistent=True
+b_layer3_1_conv_4_running_var: BUFFER target='layer3.1.conv.4.running_var' persistent=True
+b_layer3_1_conv_4_num_batches_tracked: BUFFER target='layer3.1.conv.4.num_batches_tracked' persistent=True
+x: USER_INPUT
+
+# outputs
+squeeze: USER_OUTPUT
+ÇJ
+2pkg.torch.export.ExportedProgram.range_constraints{s77: VR[0, int_oo]}B
+ 

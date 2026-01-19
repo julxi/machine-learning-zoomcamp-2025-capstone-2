@@ -1,127 +1,153 @@
 # Setting
 
-I like ML a bit more than supervised learning. So I thought maybe I could train a chess engine with some a-class training material (I'm not a chess player btw).
+I like ML a bit more than supervised learning. So I thought maybe I could train a chess engine with some A-class training material (I'm not a chess player btw).
 
-I had great plans for this, like being able to play against the derpy agents, but sadly I've run out of time, to finish all of it. So I had to stop at the deploy stage level.
+The idea is that we use supervised learning to predict the advantage of the player to move. And the we can leverage this to identify good moves.
 
-Also I couldn't do proper fine-tuning or experiments with different neural network architectures since training just takes too long and also comparing losses for different loss functions or target transformations is tricky.
+It's also interesting from a theoretical side of it. During training the models only see chess position (encoded of course) and the advantage of the player to move. It doesn't know anything about the rules of chess. Which is fairly standard in ML. The other point is that it only learns from high level play, so it would be interesting to see if and how it struggels to answer really bad moves it has not encountered in its training data.
 
-**Heads-up**: There is no docker nor cloud deployment 🚫.
+### Disclaimer
+
+I had great plans for this, like being able to play against the derpy agents, but sadly I've run out of time to finish all of it. So I had to stop at the deploy stage.
+
+Also, I couldn't do proper fine-tuning or experiments with different neural network architectures, since training just takes too long, and I didn't have the time to wait for more epochs. 
+
+I also didn't clean up the repo, all python scripts are on the project-root level. Sorry for the mess.
+
+**Heads-up**: There is no Docker nor cloud deployment 🚫.
 
 # 1. Problem Description
 
-I've got a dataset from Kaggle https://www.kaggle.com/datasets/ronakbadhe/chess-evaluations. The dataset comes from this project https://github.com/r2dev2/ChessDataContributor/tree/master that collectively used stockfish to analyse chess positions.
+I've got a dataset from Kaggle: https://www.kaggle.com/datasets/ronakbadhe/chess-evaluations.  
+The dataset comes from this project: https://github.com/r2dev2/ChessDataContributor/tree/master, which collectively used Stockfish to analyse chess positions (it seems abandoned or should we say finished :D).
 
-It has only two fields
+The data has only two fields:
 
 - fen (string notation for chess positions)
 - evaluation
 
-What we basically want is to train a model that gets a fen and turns that into an evaluation.
+What we basically want is to train a model that takes a FEN and turns that into an evaluation.
 
 The ideal workflow is as follows:
+
 ```
 Exploratory Data Analysis (EDA) + Feature Engineering
-→ Try out Neural Network with different loss functions, target transformation, and architecture
-→ Train Script with Best Parameters and onnxing the model
-→ Creat a Deployment Script
+→ Try out neural networks with different loss functions, target transformations, and architectures
+→ Train script with best parameters and ONNX export
+→ Create a deployment script
 ```
 
 # 2. Data Description
 
-The column 'fen' contains the [Forsyth–Edwards Notation](https://en.wikipedia.org/wiki/Forsyth%E2%80%93Edwards_Notation) of a chess position. It describes a chess position. An example looks like this `R1k5/8/1pK5/1r1P3p/P4r2/8/8/7r b - - 0 50
-`. The string consists of 6 parts separated by spaces. The first part describes the board, which in our example looks like this:
+The column `fen` contains the [Forsyth–Edwards Notation](https://en.wikipedia.org/wiki/Forsyth%E2%80%93Edwards_Notation) of a chess position, which describes a chess position. An example of such a string looks like this:
 
+`R1k5/8/1pK5/1r1P3p/P4r2/8/8/7r b - - 0 50`
+
+The string consists of 6 parts separated by spaces. 
+
+- 1.: The first part '`R1k5/8/1pK5/1r1P3p/P4r2/8/8/7r`' describes the board, which decodes to this:
 ![example_fen](/pictures/example_fen.svg)
+- 2.: The second part of the string encodes whose turn it is. In our case it's `b` for black.
+- 3.: and 4.:  The third and fourth parts encode en passant squares and castling rights. Here they are `-`, which means no en passant square and no castling rights.
+- 5.: and 6.: The final two numbers are clocks. The last one is the total move clock, ticking up after both players have moved, and the other number is the half-move clock for pawn moves and captures. For details I refer to the Wikipedia article. What is important about the clocks is that they restrict the length of games, so even when two derpy neural networks play against each other, their match will eventually finish in a draw.
 
-The second part of the string encodes the colours who's turn it is. In our case it's `b` for black.
+The other column, `evaluation`, shows a Stockfish evaluation of the position from White's perspective. It is a string, but semantically it is distinguished into *advantage* and a *mate counter*.
 
-The third and fourth part encode en-passant squares and castling rights. Here they are `-` which means no en-passant square and no castling rights.
+The evaluation is a mate counter when it starts with `#`. Then the next character is either a `+` or `-`, which indicates whether it's a forced mate for White or for Black. The number following the sign indicates how many moves it will take to mate. For example, `#-3` means that Black can mate in 3 moves. If the number is `0`, then the position describes a mate position. For example, in the picture above the evaluation is `#+0`, as it's a position in which Black is mated.
 
-The final two numbers are clocks. The last one is the total clock, ticking up after both player have moved and the other number is a clock for pawn moves. For the details I refer to the wikipedia article. What is important about the clocks is, that they restrict the length of games, so even when two derpy neural network play against each other, their match will eventually finish in a draw.
+If the evaluation does not start with a `#`, it is the advantage of White. The more positive it is, the more White is winning. The more negative it is, the more Black is winning. An advantage of `0` means the position is even (most likely a draw). The advantage is actually measured in centipawns, but that doesn't matter here.
 
-The other column `evaluation` shows a stockfish evaluation of the position from whites perspective. It is a string but semantically it is distinguished into an advantage and mate counter.
-
-The evaluation is a mate counter when it starts with a `#`. Then the next character is either a `+` or `-` which indicates if it's a mate for white or for black. The number following the sign indicates how many moves it will take to mate. For example `#-3` means that black can mate in 3 moves. If the number is `0` then the position describes a mate position, like above in the picture the evaluation is `#+0` as the fen describes a position in which black is mated.
-
-If the evalutaion does not start with a `#`, it is the advantage of white. The more positive the more is white winning. The more negative the more is black winning. Advantage of `0` means the position is even (most likely a draw). The advantage is actually measured in centipawns, but that doesn't matter here.
-
-**Note**: if you are wondering where this silly chess position of the example above comes from. It's from a game between two derpy chess engines.
-
+**Note**: If you are wondering where this silly chess position in the example above comes from: it's from a game between two derpy chess engines.
 
 # 3. EDA Summary
 
-EDA and data preparation was done in the notebook `notebooks/01_data_preparation.ipynb`.
-A big part of the EDA was finding out the conventions desribed in the previous section, though not present int the notebook anymore.
+EDA and data preparation were done in the notebook `notebooks/01_data_preparation.ipynb`.  
+A big part of the EDA was finding out the conventions described in the previous section, although these are not present in the notebook anymore.
 
-Mostly the notebook is about data preparation. The two main parts are:
-- change evaluation from _white's perspective_ to _current player's perspective_ (more in the next section)
-- turning `evaluation` into an integer `advantage` that takes extreme values if evaluation is a mate in X.
-- identify and remove identical positions under mirroring of the position
+Mostly, the notebook is about data preparation. The two main parts are:
+- changing the evaluation from _White's perspective_ to _the current player's perspective_ (more in the next section)
+- turning `evaluation` into an integer `advantage` that takes extreme values if the evaluation is a mate in X
+- identifying and removing identical positions under mirroring of the position
 
-
-A mirroring a position means taking a position like this one (sorry for the messy position)
+Mirroring a position means taking a position like this one (sorry for the messy position):
 
 ![example_fen](/pictures/position_before_mirroring.svg)
 
-and basically swapping the roles
+and basically swapping the roles:
 
 ![example_fen](/pictures/position_after_mirroring.svg)
 
-the white player is now the black player and vice versa but both keep their positions and turns. A good evaluation should be invariant under mirroring. If white has `+100` centipawns in a position that black should have `+100` centipawns in the mirrored position.
+The White player is now the Black player and vice versa, but both keep their positions and turns. A good evaluation should be invariant under mirroring. If White has `+100` centipawns in a position, then Black should have `+100` centipawns in the mirrored position.
 
 There are also other things done in the notebook, but these are the main ones.
 
 # 4. Modelling Approach & Metrics
 
-The neural network models operate of tensors of shape `(15, 8, 8)`. The first channel encodes the piece (6 for white + 6 for black) and then there are 3 more channels for castling rules and en passant. The other two channels desrcibe the file and rank of the square. For example `board_array(0,1,1)` means that there is a white pawn on the square `b2` (actually I don't know if the exact position is correct which depends on the orientation, but as long as we use the same encoding function for training and deployment it's fine).
+### Target
 
-I don't know which neural network architecture is best for chess. So I just asked a LLM agent to give me three options (small, medium, big) and see which ones best.
+The untransformed target distribution looks like this:
 
-The metric for determining which model is best was kind of the most fun and biggest let down for me at the same time. So instead of using MSE, MAE or any other metric for deciding which model is better, I just let them play against each other. Even though they can only evaluate a position we can use the evaluation to to look ahead and decide on the value of a move:
-E.g. in the start position
+![target_distribution](/pictures/target_distribution.png)
+
+It looks so zoomed out because the tails are so far out and there is hugh spike at `0`. Most of the mass is concentrated around 0 but the huge outliers can make it hard for the model to learn, I think. So what I went with is a [arsinh](https://en.wikipedia.org/wiki/Inverse_hyperbolic_functions)-transformation, which keeps the values around `0` uncompressed but compresses the outliers.
+
+### Loss for Training
+
+Here my first choice is the Hubner-loss which is like MSE around 0 but L1 for big values. So basically arsinh and Hubner-loss are a one two punch.
+
+### Neural Network Architecture
+
+The neural network models operate on tensors of shape `(15, 8, 8)`. The first channels encode the pieces (6 for White + 6 for Black), and then there are 3 more channels for castling rules and en passant. The remaining two channels describe the file and rank of the square.
+
+For example, `board_array(0, 1, 1)` means that there is a White pawn on the square `b2` (I don't actually know if this exact position is correct, as it depends on the orientation, but as long as we use the same encoding function for training and deployment it's fine).
+
+I don't know which neural network architecture is best for chess, so I just asked a LLM agent to give me three options (small, medium, big) and see which ones work best.
+
+### Evaluation Metric
+
+The metric for determining which model is best was kind of the most fun and the biggest letdown for me at the same time. Instead of using MSE, MAE, or any other metric for deciding which model is better, I just let them play against each other.
+
+Even though they can only evaluate a position, we can use the evaluation to look ahead and decide on the value of a move. For example, in the starting position:
 
 ![example_fen](/pictures/start_position.svg)
 
-We can just emulate all possible starting moves, get the advantage (by design this is the advantage of the black player) for each of these resulting positions and choose the move that results in the smallest advantage for black.
+we can emulate all possible starting moves, get the advantage (by design this is the advantage of the Black player) for each resulting position, and choose the move that results in the smallest advantage for Black.
 
-So in principle a great idea but in practice it didn't really work. All models that I've trained did perform basically equally well. Why I think this is, I'll explain in the last section about limitations.
-
+So in principle this is a great idea, but in practice it didn't really work. All models that I trained performed basically equally well. Why I think this is the case I'll explain in the last section about limitations.
 
 # 5. How to run and what
 
-I managed this project using `uv`. For this you should have a global installation of `uv` and then run `uv sync` to install the dependencies.
+I managed this project using `uv`. For this you should have a global installation of `uv`, and then run `uv sync` to install the dependencies.
 
-If you use a differnet package manager you have to install the packages from `pyproject.toml`.
+If you use a different package manager, you have to install the packages from `pyproject.toml`.
 
-If anything doesn't work properly. I already apologize but I didn't have any time to clean up the repo (cluttered with python files) nor test the setup from scratch.
+If anything doesn't work properly, I already apologise — I didn't have time to clean up the repo (it's cluttered with Python files) nor test the setup from scratch.
 
 ## Running EDA and Data Preparation
 
-First download the `chess-evaluation.zip` from kaggle and unzip it into the `data` folder (you need an account for that, the data is too big to ship it in the repo, sorry).
-Check that you have `data/chessData.csv` now. (We don't need the other files in the zip)
+First, download `chess-evaluation.zip` from Kaggle and unzip it into the `data` folder (you need an account for that; the data is too big to ship with the repo, sorry).  
+Check that you now have `data/chessData.csv` (we don't need the other files in the zip).
 
-Now you can just open `01_data_preparation.ipynb` and run the cells (however you open jupyter notebooks, make sure that you use the venv that you created with `uv` for the notebook)
-
+Now you can open `01_data_preparation.ipynb` and run the cells (however you open Jupyter notebooks, make sure that you use the venv created with `uv` for the notebook).
 
 ## Tuning the Training
 
-For this you can just open `02_model_training.ipynb`. It uses the file `data/cleaned/chess_train_val_small.csv` which is included in the repo (and was generated by the previous notebook).
+For this you can open `02_model_training.ipynb`. It uses the file `data/cleaned/chess_train_val_small.csv`, which is included in the repo (and was generated by the previous notebook).
 
-Note that the training cells need quite long to execute. And the results themselves are not very expressive.
+Note that the training cells take quite a long time to execute, and the results themselves are not very expressive.
 
-## Run the final Training
+## Run the Final Training
 
-You have to run `final_fit.py` for this (in uv).
+You have to run `final_fit.py` for this (in `uv`).
 
-One way (on Linux is)
+One way (on Linux) is:
 
-Activate 
+Activate:
 ```bash
 source .venv/bin/activate
 python final_fit.py
 ```
-This generates onnx files in `models`. You can change in the `main` which model architecture, how many epochs, and if you want to use the small training data or the full data. (The full data is only available if you ran the date preparation notebook)
+This generates ONNX files in `models`. You can change in `main` which model architecture to use, how many epochs to run, and whether to use the small training data or the full dataset. (The full data is only available if you ran the data preparation notebook.)
 
 ## Running the Server Locally
 ```bash
@@ -144,7 +170,12 @@ curl -X POST http://localhost:8000/predict \
 ```
 
 
-## 7. Known limitations / next steps
+## 7. Known Limitations / Next Steps
+
+
+
+2.5 hours 15 minutes faster, 0.34
+plateude at 0.55
 
 After nearly two hours: medium-loss: 0.371 for mini: 0.56 and plateauing.
 
