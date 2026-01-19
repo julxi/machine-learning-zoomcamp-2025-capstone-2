@@ -172,11 +172,16 @@ curl -X POST http://localhost:8000/predict \
 
 ## 7. Known Limitations / Next Steps
 
+I said that comparing the different architectures/loss functions/targets was inconclusive. A next step would be to increase the size of the training data. The last training on the full training data showed quite interestingly that the 
+
+| Architecture | Epochs | Training Time | Final Loss |
+|------------|--------|---------------|------------|
+| small      | 5      | 2.45 h        | 0.55       |
+| medium        | 2      | 2.30 h        | 0.34       |
 
 
-2.5 hours 15 minutes faster, 0.34
-plateude at 0.55
+So that speaks quite in favour of the medium model. I don't know though if that also translates in higher loss/win/draw rate, since I couldn't test this.
 
-After nearly two hours: medium-loss: 0.371 for mini: 0.56 and plateauing.
+That also ties in with my biggest fear that it is really hard for these models to mate. The model is trained to evaluate good positions. But a position that creates a mate and a position that creates a mate a bit later might not be big of a difference advantage wise, both are basically winning positions. So the models might just orbit in the winning position without ever actually mating.
 
--TBD
+Obvious next steps would be a proper RL setup with selfplay and all the bells and whistles that I have avoided in this project.

@@ -7,7 +7,7 @@ from pydantic import BaseModel
 
 # Load model
 session = ort.InferenceSession(
-    "models/chess_eval.onnx",
+    "models/chess_eval-full_data-medium_model-2_epochs.onnx",
     providers=["CPUExecutionProvider"],
 )
 
