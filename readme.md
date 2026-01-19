@@ -136,6 +136,8 @@ For this you can open `02_model_training.ipynb`. It uses the file `data/cleaned/
 
 Note that the training cells take quite a long time to execute, and the results themselves are not very expressive.
 
+**Warning**: Training with the full dataset creates a 46GB temporary data to store the tensors.
+
 ## Run the Final Training
 
 You have to run `final_fit.py` for this (in `uv`).
@@ -168,6 +170,10 @@ curl -X POST http://localhost:8000/predict \
   -d '{"fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"}'
 
 ```
+
+## Kind of playing against the model
+
+For this open `notebooks/98_kind_of_play.ipynb`. Read the instructions there. Basically you execute one cell for the model and then one cell for your move. Not very comfortable but there you can see how bad the models play.
 
 
 ## 7. Known Limitations / Next Steps
