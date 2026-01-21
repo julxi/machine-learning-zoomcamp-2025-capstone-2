@@ -133,8 +133,9 @@ Later I did a second run with the current data set and we got these results:
 | small | 4 | 2h | 0.59
 | medium | 2 | 2h | 0.39
 | large | 1 | 2h | 0.38
+| large | 2 | 4h | 0.35
 
-Small val_loss plateaued after 2 epochs so did it for medium. Large can have a better overall performance.
+Small val_loss plateaued after 2 epochs so did it for medium. Large can have a better overall performance. I don't know when large plateaus.
 
 # 5. How to run and what
 
@@ -204,9 +205,16 @@ When you run
 python -m src.play
 ```
 
-You can play against an agent of your choice in the terminal. It's not very comfortable as you have to type in your moves like this `h2h4` or `Rb6` but it allows you to experience the agents for yourself.
+you can play against an agent of your choice directly in the terminal.
 
 ![playing against agents in the console](pictures/play_against_agent.png)
+
+During gameplay, you'll notice that the agents follow a basic strategy to some extend.
+However, the experience isn't particularly user-friendly, as you need to manually type in your moves. The most intuitive notation I found to use was the algebraic notation: you specify your piece ("K", "Q", "R", "B", "N", or leave it empty for pawns) followed by the destination square, such as `Qe4`. For captures, insert an "x" between the piece and the destination, like `Qxe4`.
+Alternatively, you can use the simpler [UCI](https://en.wikipedia.org/wiki/Universal_Chess_Interface) (Universal Chess Interface) notation, where you provide both the starting and ending squares, e.g., `h2h4`.
+
+
+**Note:** I liked 
 
 
 
