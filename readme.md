@@ -1,18 +1,16 @@
 # Setting
 
-I like ML a bit more than supervised learning. So I thought maybe I could train a chess engine with some A-class training material (I'm not a chess player btw).
+I really like ML so I though maybe I could use supervised learning to train a chess engine. (I'm not a chess player btw).
 
 The idea is that we use supervised learning to predict the advantage of the player to move. And the we can leverage this to identify good moves.
 
-It's also interesting from a theoretical side of it. During training the models only see chess position (encoded of course) and the advantage of the player to move. It doesn't know anything about the rules of chess. Which is fairly standard in ML. The other point is that it only learns from high level play, so it would be interesting to see if and how it struggels to answer really bad moves it has not encountered in its training data.
+It's instructive from a theoretical side and while working on this problem there are some pitfalls and to be honest I didn't get through all of them. During training the models only see chess position (encoded of course) and the score (the advantage) of this position. It only learns to identify these good positions without learning any of the rules. This is actually fairly standard for ML, but it creates some problems with encouraging moves that lead to mates and not just to a strong position. The other problem is that it only learns from high level play, so it would be interesting to see if and how it can generalise this data to chess positions that appear in amateur play.
 
 ### Disclaimer
 
-I had great plans for this, like being able to play against the derpy agents, but sadly I've run out of time to finish all of it. So I had to stop at the deploy stage.
+I had great plans for this, like being able to play against the derpy agents, which is kind of possible but it's not very convenient.
 
 Also, I couldn't do proper fine-tuning or experiments with different neural network architectures, since training just takes too long, and I didn't have the time to wait for more epochs. 
-
-I also didn't clean up the repo, all python scripts are on the project-root level. Sorry for the mess.
 
 **Heads-up**: There is no Docker nor cloud deployment 🚫.
 
@@ -59,14 +57,14 @@ If the evaluation does not start with a `#`, it is the advantage of White. The m
 
 **Note**: If you are wondering where this silly chess position in the example above comes from: it's from a game between two derpy chess engines.
 
-# 3. EDA Summary
+# 3. EDA and Feature Engineering Summary
 
 EDA and data preparation were done in the notebook `notebooks/01_data_preparation.ipynb`.  
 A big part of the EDA was finding out the conventions described in the previous section, although these are not present in the notebook anymore.
 
 Mostly, the notebook is about data preparation. The two main parts are:
 - changing the evaluation from _White's perspective_ to _the current player's perspective_ (more in the next section)
-- turning `evaluation` into an integer `advantage` that takes extreme values if the evaluation is a mate in X
+- turning `evaluation` into an `advantage` that takes extreme values if the evaluation is a mate in X
 - identifying and removing identical positions under mirroring of the position
 
 Mirroring a position means taking a position like this one (sorry for the messy position):
@@ -91,9 +89,11 @@ The untransformed target distribution looks like this:
 
 It looks so zoomed out because the tails are so far out and there is hugh spike at `0`. Most of the mass is concentrated around 0 but the huge outliers can make it hard for the model to learn, I think. So what I went with is a [arsinh](https://en.wikipedia.org/wiki/Inverse_hyperbolic_functions)-transformation, which keeps the values around `0` uncompressed but compresses the outliers.
 
+But actually I'm not sure if that is the right approach. Half of the outliers are made by the Feature Engineering from the previous step, so that the models would see a significant difference in a position that is mate in 4 and mate in 3. I didn't have time to compare two models using the original target and the arsinh-transformed target.
+
 ### Loss for Training
 
-Here my first choice is the Hubner-loss which is like MSE around 0 but L1 for big values. So basically arsinh and Hubner-loss are a one two punch.
+Here my first choice is the Hubner-loss which is like MSE around 0 but L1 for big values. So basically arsinh and Hubner-loss are a one two punch to not punish extreme values too hard (again I don't know if this is the appropriate choice).
 
 ### Neural Network Architecture
 
@@ -102,6 +102,18 @@ The neural network models operate on tensors of shape `(15, 8, 8)`. The first ch
 For example, `board_array(0, 1, 1)` means that there is a White pawn on the square `b2` (I don't actually know if this exact position is correct, as it depends on the orientation, but as long as we use the same encoding function for training and deployment it's fine).
 
 I don't know which neural network architecture is best for chess, so I just asked a LLM agent to give me three options (small, medium, big) and see which ones work best.
+
+At one stage of the project I ran a fairly large run for small, medium and middle (but for a slightly different data set):
+
+Run on the full training set:
+
+| Architecture | Epochs | Training Time | Final Loss |
+|---|---|---|---|
+| small | 5 | 2.45 h | 0.55
+| medium | 2 | 2.30 h | 0.34
+| large | 5 | 10h | 0.30
+
+We can see that medium is better than small. It has a smaller loss after less time. Also small cannot decrease it's loss below 0.55. I don't have a fair comparison between medium and large though in this run.
 
 ### Evaluation Metric
 
@@ -147,13 +159,14 @@ One way (on Linux) is:
 Activate:
 ```bash
 source .venv/bin/activate
-python final_fit.py
+python -m final_fit
 ```
-This generates ONNX files in `models`. You can change in `main` which model architecture to use, how many epochs to run, and whether to use the small training data or the full dataset. (The full data is only available if you ran the data preparation notebook.)
+
+This generates ONNX files in `models`. You can run `python -m src.final_fit --help` to see how to change the model architecture, how many epochs to run, and whether to use the small training data or the full dataset. (The full data is only available if you ran the data preparation notebook.)
 
 ## Running the Server Locally
 ```bash
-uvicorn app:app --host 0.0.0.0 --port 8000
+uvicorn src.app:app --host 0.0.0.0 --port 8000
 ```
 
 and you cen test it with these commands
@@ -173,17 +186,35 @@ curl -X POST http://localhost:8000/predict \
 
 ## Kind of playing against the model
 
-For this open `notebooks/98_kind_of_play.ipynb`. Read the instructions there. Basically you execute one cell for the model and then one cell for your move. Not very comfortable but there you can see how bad the models play.
+When you run
+```
+python -m src.play
+```
+
+You can play againts an agent of your choice in the terminal. It's not very comfortable as you have to type in your moves like this `h2h4` or `Rb6` but it allows you to experience the agents for yourself.
+
+![playing against agents in the console](pictures/play_against_agent.png)
+
+
 
 
 ## 7. Known Limitations / Next Steps
 
 I said that comparing the different architectures/loss functions/targets was inconclusive. A next step would be to increase the size of the training data. The last training on the full training data showed quite interestingly that the 
 
+First run
 | Architecture | Epochs | Training Time | Final Loss |
-|------------|--------|---------------|------------|
-| small      | 5      | 2.45 h        | 0.55       |
-| medium        | 2      | 2.30 h        | 0.34       |
+|---|---|---|---|
+| small | 5 | 2.45 h | 0.55
+| medium | 2 | 2.30 h | 0.34
+| large | 5 | 10h | 0.30
+
+Second run
+
+| Architecture | Epochs | Training Time | Final Loss |
+|---|---|---|---|
+| large | 1 | 2h | 0.38
+
 
 
 So that speaks quite in favour of the medium model. I don't know though if that also translates in higher loss/win/draw rate, since I couldn't test this.
