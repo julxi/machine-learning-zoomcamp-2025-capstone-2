@@ -103,18 +103,6 @@ For example, `board_array(0, 1, 1)` means that there is a White pawn on the squa
 
 I don't know which neural network architecture is best for chess, so I just asked a LLM agent to give me three options (small, medium, big) and see which ones work best.
 
-At one stage of the project I ran a fairly large run for small, medium and middle (but for a slightly different data set):
-
-Run on the full training set:
-
-| Architecture | Epochs | Training Time | Final Loss |
-|---|---|---|---|
-| small | 5 | 2.45 h | 0.55
-| medium | 2 | 2.30 h | 0.34
-| large | 5 | 10h | 0.30
-
-
-
 ### Evaluation Metric
 
 The metric for determining which model is best was kind of the most fun and the biggest letdown for me at the same time. Instead of using MSE, MAE, or any other metric for deciding which model is better, I just let them play against each other.
@@ -142,10 +130,11 @@ Later I did a second run with the current data set and we got these results:
 
 | Architecture | Epochs | Training Time | Final Loss |
 |---|---|---|---|
+| small | 4 | 2h | 0.59
 | medium | 2 | 2h | 0.39
 | large | 1 | 2h | 0.38
 
-Medium val_loss plateaued after one epoch, so it was faster than large. Large can have a better overall performance though, as it has a lower asymptotic loss (which I did not reach though).
+Small val_loss plateaued after 2 epochs so did it for medium. Large can have a better overall performance.
 
 # 5. How to run and what
 
@@ -182,7 +171,7 @@ source .venv/bin/activate
 python -m final_fit
 ```
 
-This generates ONNX files in `models`. You can run `python -m src.final_fit --help` to see how to change the model architecture, how many epochs to run, and whether to use the small training data or the full dataset. (The full data is only available if you ran the data preparation notebook.)
+This generates ONNX files in `models`. You can run `python -m src.final_fit --help` to see how to change the model architecture, how many epochs to run, and whether to use the small training data or the full dataset. (For the full data you need to run the data preparation notebook, but I wouldn't do it anyway because it creates a 40GB file in scratch)
 
 ## Running the Server Locally
 
