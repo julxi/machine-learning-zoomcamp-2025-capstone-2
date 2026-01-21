@@ -113,19 +113,39 @@ Run on the full training set:
 | medium | 2 | 2.30 h | 0.34
 | large | 5 | 10h | 0.30
 
-We can see that medium is better than small. It has a smaller loss after less time. Also small cannot decrease it's loss below 0.55. I don't have a fair comparison between medium and large though in this run.
+
 
 ### Evaluation Metric
 
 The metric for determining which model is best was kind of the most fun and the biggest letdown for me at the same time. Instead of using MSE, MAE, or any other metric for deciding which model is better, I just let them play against each other.
 
-Even though they can only evaluate a position, we can use the evaluation to look ahead and decide on the value of a move. For example, in the starting position:
+Even though the models are only trained to evaluate the current position, we can use look ahead to get evaluate moves. For example, in the starting position:
 
 ![example_fen](/pictures/start_position.svg)
 
 we can emulate all possible starting moves, get the advantage (by design this is the advantage of the Black player) for each resulting position, and choose the move that results in the smallest advantage for Black.
 
-So in principle this is a great idea, but in practice it didn't really work. All models that I trained performed basically equally well. Why I think this is the case I'll explain in the last section about limitations.
+So in principle this is a great idea, but in practice it didn't really work. All models that I trained performed basically equally well. I think it's because the models don't learn how to mate. Why I think this is the case I'll explain in the last section about limitations.
+
+The only indication of the strength of the different models we have is their validation loss (hubner loss). I did some runs with a slightly different data set and we got these results.
+
+First run
+| Architecture | Epochs | Training Time | Final Loss |
+|---|---|---|---|
+| small | 5 | 2.45 h | 0.55
+| medium | 2 | 2.30 h | 0.34
+| large | 5 | 10h | 0.30
+
+We can see that medium is better than small. It has a smaller loss after less time. Also small cannot decrease it's loss below 0.55. I don't have a fair comparison between medium and large though in this run.
+
+Later I did a second run with the current data set and we got these results:
+
+| Architecture | Epochs | Training Time | Final Loss |
+|---|---|---|---|
+| medium | 2 | 2h | 0.39
+| large | 1 | 2h | 0.38
+
+Medium val_loss plateaued after one epoch, so it was faster than large. Large can have a better overall performance though, as it has a lower asymptotic loss (which I did not reach though).
 
 # 5. How to run and what
 
@@ -165,7 +185,10 @@ python -m final_fit
 This generates ONNX files in `models`. You can run `python -m src.final_fit --help` to see how to change the model architecture, how many epochs to run, and whether to use the small training data or the full dataset. (The full data is only available if you ran the data preparation notebook.)
 
 ## Running the Server Locally
+
+
 ```bash
+# in venv
 uvicorn src.app:app --host 0.0.0.0 --port 8000
 ```
 
@@ -188,10 +211,11 @@ curl -X POST http://localhost:8000/predict \
 
 When you run
 ```
+# in venv
 python -m src.play
 ```
 
-You can play againts an agent of your choice in the terminal. It's not very comfortable as you have to type in your moves like this `h2h4` or `Rb6` but it allows you to experience the agents for yourself.
+You can play against an agent of your choice in the terminal. It's not very comfortable as you have to type in your moves like this `h2h4` or `Rb6` but it allows you to experience the agents for yourself.
 
 ![playing against agents in the console](pictures/play_against_agent.png)
 
@@ -200,25 +224,11 @@ You can play againts an agent of your choice in the terminal. It's not very comf
 
 ## 7. Known Limitations / Next Steps
 
-I said that comparing the different architectures/loss functions/targets was inconclusive. A next step would be to increase the size of the training data. The last training on the full training data showed quite interestingly that the 
+I said that comparing the different loss functions/targets was inconclusive. The problem is to compare the losses when you change the loss function or the targets.
+My idea to circumvent this is to let the models play against each other. The problem here is that the models don't mate (I think, there hasn't been a proper analysis). So to decide which methods work best, we would need other methods to compare the models. For example count the pieces for the final position or after 10 moves or something. You can see I'm just scrambling to get any signal from these models.
 
-First run
-| Architecture | Epochs | Training Time | Final Loss |
-|---|---|---|---|
-| small | 5 | 2.45 h | 0.55
-| medium | 2 | 2.30 h | 0.34
-| large | 5 | 10h | 0.30
+So why is it so hard for the models to mate? I think it's because the valuation is very high for clear winning positions so any random movements will sill have a high valuation and apparently the models are not good enough to discriminate between them.
 
-Second run
-
-| Architecture | Epochs | Training Time | Final Loss |
-|---|---|---|---|
-| large | 1 | 2h | 0.38
-
-
-
-So that speaks quite in favour of the medium model. I don't know though if that also translates in higher loss/win/draw rate, since I couldn't test this.
-
-That also ties in with my biggest fear that it is really hard for these models to mate. The model is trained to evaluate good positions. But a position that creates a mate and a position that creates a mate a bit later might not be big of a difference advantage wise, both are basically winning positions. So the models might just orbit in the winning position without ever actually mating.
+One way to solve this problem is tho have a multiheaded model for the output. So we respect the stockfish evaluation and try to predict the mate_in and evaluation separately.
 
 Obvious next steps would be a proper RL setup with selfplay and all the bells and whistles that I have avoided in this project.
